@@ -1,3 +1,5 @@
+// 메인 페이지
+
 import type { NextPage } from 'next'
 import React from 'react'
 import home from '../styles/Home.module.scss'
