@@ -5,10 +5,12 @@ import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons"
 import Link from "next/link"
 import { useState } from 'react'
 
-export default function Header() {
-  const [searchIcon, setSearchIcon] = useState(true)
-  const toggleSearchIcon = () => setSearchIcon(!searchIcon)
+interface HeaderProps {
+  searchIcon: boolean;
+  toggleSearchIcon(): void;
+}
 
+export default function Header(props: HeaderProps) {
   return (
     <header className={header.header}>
       <Link href="/">
@@ -20,19 +22,19 @@ export default function Header() {
         />
       </Link>
       {
-        searchIcon
+        props.searchIcon
           ? <Link href="/search">
             <FontAwesomeIcon
               icon={faMagnifyingGlass}
               height={25}
-              onClick={toggleSearchIcon}
+              onClick={props.toggleSearchIcon}
             />
           </Link>
           : <Link href="/">
             <FontAwesomeIcon
               icon={faXmark}
               height={25}
-              onClick={toggleSearchIcon}
+              onClick={props.toggleSearchIcon}
             />
           </Link>
       }

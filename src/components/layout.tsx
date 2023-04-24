@@ -1,8 +1,16 @@
-import { PropsWithChildren, useState } from "react"
+import { PropsWithChildren, useEffect, useState } from "react"
 import Head from "next/head"
 import Header from "@/components/Header/Header"
+import { Data } from "@/services/common"
 
 export default function Layout({ children }: PropsWithChildren) {
+  const [searchIcon, setSearchIcon] = useState(true)
+  const toggleSearchIcon = () => setSearchIcon(!searchIcon)
+
+  useEffect(() => {
+    setSearchIcon(Data.get('search') === null || Data.get('search') === false)
+  }, [])
+
   return (
     <>
       <Head>
@@ -12,7 +20,7 @@ export default function Layout({ children }: PropsWithChildren) {
       </Head>
 
       <div>
-        <Header />
+        <Header searchIcon={searchIcon} toggleSearchIcon={toggleSearchIcon} />
         <div>
           {children}
         </div>
