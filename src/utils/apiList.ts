@@ -13,11 +13,11 @@ interface ApiList {
 }
 
 const apiList: ApiList = {
-  // 단일 파일 조회
-  'getSingleFile': {
+  // 실시간 인기 순위 영화 리스트 목록 조회
+  'getPopularMovie': {
     method: 'GET',
-    url: '/api/v1/file/',
-    desc: '단일 파일 조회'
+    url: `${domain}/api/v1/movie/popular`,
+    desc: '실시간 인기 순위 영화 리스트 목록 조회'
   },
 }
 
