@@ -4,6 +4,9 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  images: {
+    domains: ['image.tmdb.org'], // Add "image.tmdb.org" as an allowed image source
+  },
 }
 
 module.exports = nextConfig

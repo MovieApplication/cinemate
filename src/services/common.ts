@@ -1,15 +1,8 @@
 import { Api } from "@/utils/apiList"
 import axios from "axios"
 
-interface AxiosOption {
-  withCredentials: boolean;
-  headers?: object;
-  params?: object;
-  data?: object;
-}
-
 export const GetApi = async ($api: Api, $param?: object) => {
-  let option: AxiosOption = {
+  let option: object = {
     withCredentials: true,
   }
 
