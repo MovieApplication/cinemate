@@ -1,4 +1,4 @@
-const domain = '//localhost:8080'
+const domain = 'http://localhost:8080'
 
 export interface Api {
   method: string;

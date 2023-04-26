@@ -2,7 +2,8 @@
 import type { NextPage } from 'next'
 import React, {useEffect, useState} from 'react'
 import home from '../styles/Home.module.scss'
-import axios from "axios"
+import {GetApi} from "@/services/common"
+import apiList from "@/utils/apiList"
 
 interface PopularList {
   adult: boolean;
@@ -25,13 +26,9 @@ const Home: NextPage = () => {
   const [popularList, setPopularList] = useState<PopularList[]>([])
 
   // 실시간 인기 순위 영화 리스트 목록 조회
-  const fnGetPopularMovie = async () => {
-    await axios.get('http://localhost:8080/api/v1/movie/popular').then(res => {
-      try {
-        setPopularList(res.data.results)
-      } catch (err) {
-        alert(`${err.response.data.errorMessage ? err.response.data.errorMessage : err.response.data.message}`)
-      }
+  const fnGetPopularMovie = () => {
+    GetApi(apiList.getPopularMovie).then(res => {
+      setPopularList(res.results)
     })
   }
 
