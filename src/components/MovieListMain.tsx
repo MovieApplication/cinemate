@@ -1,4 +1,4 @@
-import {MovieListItems} from "@/utils/interface"
+import {MovieListItems} from "utils/interface"
 import Image from "next/image"
 
 interface MovieListProps {

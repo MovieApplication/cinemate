@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import search from './Search.module.scss'
 import { useEffect } from 'react'
-import { Data } from '@/services/common'
+import { Data } from 'services/common'
 
 const Search = () => {
   useEffect(() => {

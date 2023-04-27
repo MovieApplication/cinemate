@@ -2,13 +2,13 @@
 import type { NextPage } from 'next'
 import React, {useEffect, useState} from 'react'
 import home from '../styles/Home.module.scss'
-import {GetApi} from "@/services/common"
-import apiList from "@/utils/apiList"
-import {MovieListItems} from "@/utils/interface"
+import {GetApi} from "services/common"
+import apiList from "utils/apiList"
+import {MovieListItems} from "utils/interface"
 import dynamic from "next/dynamic"
 
 // 해당 컴포넌트가 필요한 시점에만 로드
-const MovieListMain = dynamic(() => import('@/components/MovieListMain'))
+const MovieListMain = dynamic(() => import('components/MovieListMain'))
 
 const Home: NextPage = () => {
   const [popularList, setPopularList] = useState<MovieListItems[]>([])

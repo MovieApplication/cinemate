@@ -1,4 +1,4 @@
-import { Api } from "@/utils/apiList"
+import { Api } from "utils/apiList"
 import axios from "axios"
 
 export const GetApi = async ($api: Api, $param?: object) => {
