@@ -5,8 +5,9 @@ import {Swiper, SwiperSlide} from "swiper/react"
 // Import Swiper styles
 import 'swiper/css'
 import 'swiper/css/virtual'
+import home from 'styles/Home.module.scss'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons"
+import {faChevronLeft, faChevronRight, faCircleInfo} from "@fortawesome/free-solid-svg-icons"
 
 interface MovieListProps {
   ListItem: MovieListItems[];
@@ -33,13 +34,19 @@ const MovieListMain = (props: MovieListProps) => {
         </div>
         {
           props.ListItem.map((items, index) => (
-            <SwiperSlide key={items.id} spaceBetween={10} virtualIndex={index}>
+            <SwiperSlide key={items.id} spacebetween={10} virtualIndex={index}>
               <Image
                 src={items.poster_path === 'https://image.tmdb.org/t/p/w500/null' ? '/images/none_poster.png' : items.poster_path}
                 alt={items.title}
                 width={200}
                 height={260}
               />
+              <ul className={home.cover}>
+                <li><FontAwesomeIcon icon={faCircleInfo} /></li>
+                <li>{items.title}</li>
+                <li><span>평점</span> {items.vote_average} / 10</li>
+                <li>{items.overview}</li>
+              </ul>
             </SwiperSlide>
           ))
         }

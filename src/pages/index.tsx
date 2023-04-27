@@ -1,7 +1,7 @@
 // 메인 페이지
 import type { NextPage } from 'next'
 import React, {useEffect, useState} from 'react'
-import home from '../styles/Home.module.scss'
+import home from 'styles/Home.module.scss'
 import {GetApi} from "services/common"
 import apiList from "utils/apiList"
 import {MovieListItems} from "utils/interface"
@@ -48,7 +48,7 @@ const Home: NextPage = () => {
     })
   }
 
-  // 최근에 개봉한 순 목록 조회 (현재날짜기준)
+  // 평점 높은순으로 영화 목록 조회
   const fnGetVoteMovie = () => {
     GetApi(apiList.getVoteMovie).then(res => {
       if (res !== 'FAIL') {
@@ -57,7 +57,7 @@ const Home: NextPage = () => {
     })
   }
 
-  // 최근에 개봉한 순 목록 조회 (현재날짜기준)
+  // 년도별 영화 목록 조회
   const fnGetYearMovie = () => {
     GetApi(apiList.getYearMovie).then(res => {
       if (res !== 'FAIL') {

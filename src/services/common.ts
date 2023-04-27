@@ -4,6 +4,7 @@ import axios from "axios"
 export const GetApi = async ($api: Api, $param?: object) => {
   let option: object = {
     withCredentials: true,
+    headers: {'api-key-auth':'01057212058'}
   }
 
   if ($api.method === 'GET') {

@@ -32,6 +32,8 @@ input {
   background-color: transparent;
 }
 
+li {list-style: none;}
+
 .swiper-button-prev {
   display: block;
   font-size: 1.2rem;
@@ -62,4 +64,5 @@ input {
 
 .swiper-button-prev svg, .swiper-button-next svg {
   background-color: rgba(0,0,0,0.4);
+  cursor: pointer;
 }
