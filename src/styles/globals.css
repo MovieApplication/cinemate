@@ -31,3 +31,35 @@ input {
   border: 0;
   background-color: transparent;
 }
+
+.swiper-button-prev {
+  display: block;
+  font-size: 1.2rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #fff;
+  position: absolute;
+  top: 45%;
+  left: 0;
+  z-index: 10;
+}
+
+.swiper-button-disabled {
+  display: none;
+}
+
+.swiper-button-next {
+  display: block;
+  font-size: 1.2rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #fff;
+  position: absolute;
+  top: 45%;
+  right: 0;
+  z-index: 10;
+}
+
+.swiper-button-prev svg, .swiper-button-next svg {
+  background-color: rgba(0,0,0,0.4);
+}

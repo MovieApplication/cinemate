@@ -98,6 +98,17 @@ eval("module.exports = __webpack_require__(/*! ./dist/shared/lib/dynamic */ \"./
 
 /***/ }),
 
+/***/ "@fortawesome/react-fontawesome":
+/*!*************************************************!*\
+  !*** external "@fortawesome/react-fontawesome" ***!
+  \*************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("@fortawesome/react-fontawesome");
+
+/***/ }),
+
 /***/ "./amp-context":
 /*!******************************************************!*\
   !*** external "next/dist/shared/lib/amp-context.js" ***!
@@ -230,6 +241,17 @@ module.exports = require("react/jsx-dev-runtime");
 
 /***/ }),
 
+/***/ "@fortawesome/free-solid-svg-icons":
+/*!****************************************************!*\
+  !*** external "@fortawesome/free-solid-svg-icons" ***!
+  \****************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = import("@fortawesome/free-solid-svg-icons");;
+
+/***/ }),
+
 /***/ "axios":
 /*!************************!*\
   !*** external "axios" ***!
@@ -238,6 +260,28 @@ module.exports = require("react/jsx-dev-runtime");
 
 "use strict";
 module.exports = import("axios");;
+
+/***/ }),
+
+/***/ "swiper":
+/*!*************************!*\
+  !*** external "swiper" ***!
+  \*************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = import("swiper");;
+
+/***/ }),
+
+/***/ "swiper/react":
+/*!*******************************!*\
+  !*** external "swiper/react" ***!
+  \*******************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = import("swiper/react");;
 
 /***/ })
 
