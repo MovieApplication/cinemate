@@ -35,12 +35,14 @@ const MovieListMain = (props: MovieListProps) => {
         {
           props.ListItem.map((items, index) => (
             <SwiperSlide key={items.id} spacebetween={10} virtualIndex={index}>
-              <Image
-                src={items.poster_path === 'https://image.tmdb.org/t/p/w500/null' ? '/images/none_poster.png' : items.poster_path}
-                alt={items.title}
-                width={200}
-                height={260}
-              />
+              <div className={items.adult ? home.adultIcon : ''}>
+                <Image
+                  src={items.poster_path === 'https://image.tmdb.org/t/p/w500/null' ? '/images/none_poster.png' : items.poster_path}
+                  alt={items.title}
+                  width={200}
+                  height={260}
+                />
+              </div>
               <ul className={home.cover}>
                 <li><FontAwesomeIcon icon={faCircleInfo} /></li>
                 <li>{items.title}</li>

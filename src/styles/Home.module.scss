@@ -34,6 +34,25 @@
   }
 }
 
+.adultIcon {
+  &:after {
+    content: '19';
+    position: absolute;
+    top: 5px;
+    right: 25px;
+    color: #fff;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    text-align: center;
+    line-height: 2.5rem;
+    background-color: #d50000;
+    border-radius: 50%;
+    z-index: 30;
+  }
+}
+
 .cover {
   position: absolute;
   top: 0;
