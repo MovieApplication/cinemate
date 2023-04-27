@@ -9,7 +9,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons"
 
 interface MovieListProps {
-  popularList: MovieListItems[];
+  ListItem: MovieListItems[];
 }
 
 const MovieListMain = (props: MovieListProps) => {
@@ -32,9 +32,14 @@ const MovieListMain = (props: MovieListProps) => {
           <FontAwesomeIcon icon={faChevronRight} />
         </div>
         {
-          props.popularList.map((items, index) => (
+          props.ListItem.map((items, index) => (
             <SwiperSlide key={items.id} spaceBetween={10} virtualIndex={index}>
-              <Image src={items.poster_path} alt={items.title} width={200} height={260} />
+              <Image
+                src={items.poster_path === 'https://image.tmdb.org/t/p/w500/null' ? '/images/none_poster.png' : items.poster_path}
+                alt={items.title}
+                width={200}
+                height={260}
+              />
             </SwiperSlide>
           ))
         }

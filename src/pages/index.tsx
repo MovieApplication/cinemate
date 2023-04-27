@@ -12,6 +12,23 @@ const MovieListMain = dynamic(() => import('components/MovieListMain'))
 
 const Home: NextPage = () => {
   const [popularList, setPopularList] = useState<MovieListItems[]>([])
+  const [releaseList, setReleaseList] = useState<MovieListItems[]>([])
+  const [voteList, setVoteList] = useState<MovieListItems[]>([])
+  const [yearList, setYearList] = useState<MovieListItems[]>([])
+
+  const movieListArr = [{
+    title: '실시간 인기 순위 영화',
+    item: popularList
+  }, {
+    title: '최근 개봉 영화',
+    item: releaseList
+  }, {
+    title: '높은 평점을 기록한 영화',
+    item: voteList
+  }, {
+    title: '2023년 올해의 영화',
+    item: yearList
+  }]
 
   // 실시간 인기 순위 영화 리스트 목록 조회
   const fnGetPopularMovie = () => {
@@ -22,8 +39,38 @@ const Home: NextPage = () => {
     })
   }
 
+  // 최근에 개봉한 순 목록 조회 (현재날짜기준)
+  const fnGetReleaseMovie = () => {
+    GetApi(apiList.getReleaseMovie).then(res => {
+      if (res !== 'FAIL') {
+        setReleaseList(res.results)
+      }
+    })
+  }
+
+  // 최근에 개봉한 순 목록 조회 (현재날짜기준)
+  const fnGetVoteMovie = () => {
+    GetApi(apiList.getVoteMovie).then(res => {
+      if (res !== 'FAIL') {
+        setVoteList(res.results)
+      }
+    })
+  }
+
+  // 최근에 개봉한 순 목록 조회 (현재날짜기준)
+  const fnGetYearMovie = () => {
+    GetApi(apiList.getYearMovie).then(res => {
+      if (res !== 'FAIL') {
+        setYearList(res.results)
+      }
+    })
+  }
+
   useEffect(() => {
     fnGetPopularMovie()
+    fnGetReleaseMovie()
+    fnGetVoteMovie()
+    fnGetYearMovie()
   },[])
 
   return popularList.length > 0 ? (
@@ -34,10 +81,14 @@ const Home: NextPage = () => {
       </div>
 
       {/* Movie List */}
-      <div className={home.list}>
-        <p>실시간 인기 순위 영화</p>
-        <MovieListMain popularList={popularList}/>
-      </div>
+      {
+        movieListArr.map(data => (
+          <div className={home.list} key={data.title}>
+            <p>{data.title}</p>
+            <MovieListMain ListItem={data.item}/>
+          </div>
+        ))
+      }
     </>
   ) : <>err</>
 }
