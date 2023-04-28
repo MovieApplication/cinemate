@@ -8,7 +8,7 @@ import {MovieListItems} from "utils/interface"
 import dynamic from "next/dynamic"
 
 // 해당 컴포넌트가 필요한 시점에만 로드
-const MovieListMain = dynamic(() => import('components/MovieListMain'))
+const MovieList = dynamic(() => import('components/MovieList'))
 
 const Home: NextPage = () => {
   const [popularList, setPopularList] = useState<MovieListItems[]>([])
@@ -99,7 +99,14 @@ const Home: NextPage = () => {
         movieListArr.map(data => (
           <div className={home.list} key={data.title}>
             <p>{data.title}</p>
-            <MovieListMain ListItem={data.item}/>
+            <MovieList
+              detailList={false}
+              ListItem={data.item}
+              perView={7.5}
+              perGroup={7}
+              width={200}
+              height={260}
+            />
           </div>
         ))
       }

@@ -34,6 +34,11 @@ input {
 
 li {list-style: none;}
 
+.swiper-slide {
+  width: 100%;
+  height: 100%;
+}
+
 .swiper-button-prev {
   display: block;
   font-size: 1.2rem;

@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST={"index.tsx -> components/MovieListMain":{"id":"index.tsx -> components/MovieListMain","files":["static/chunks/src_components_MovieListMain_tsx.js"]}}
+self.__REACT_LOADABLE_MANIFEST={"detail\\[...movieId].tsx -> components/MovieList":{"id":"detail\\[...movieId].tsx -> components/MovieList","files":["static/chunks/src_components_MovieList_tsx-_58cd1.js"]},"index.tsx -> components/MovieList":{"id":"index.tsx -> components/MovieList","files":["static/chunks/src_components_MovieList_tsx-_58cd0.js"]}}
