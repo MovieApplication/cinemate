@@ -3,7 +3,7 @@ import Image from "next/image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons"
 import Link from "next/link"
-import {useEffect, useState} from "react";
+import {useEffect, useState} from "react"
 
 interface HeaderProps {
   searchIcon: boolean;
@@ -39,7 +39,7 @@ export default function Header(props: HeaderProps) {
               onClick={props.toggleSearchIcon}
             />
           </Link>
-          : <Link href="/src/pages">
+          : <Link href="/">
             <FontAwesomeIcon
               icon={faXmark}
               height={25}

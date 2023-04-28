@@ -6,7 +6,7 @@ import {MovieDetailItems} from "utils/interface"
 import detail from "./Detail.module.scss"
 import Image from "next/image"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faStar} from "@fortawesome/free-solid-svg-icons";
+import {faStar} from "@fortawesome/free-solid-svg-icons"
 
 
 const MovieDetail = () => {
@@ -50,7 +50,7 @@ const MovieDetail = () => {
               <FontAwesomeIcon icon={faStar}/>
             </div>
           </li>
-          <li>{detailData.tagline}</li>
+          <li>{detailData.tagline === '' ? detailData.original_title : detailData.tagline}</li>
           <li>{detailData.overview}</li>
           {/* 비슷한 영화 추천 */}
 
