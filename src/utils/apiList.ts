@@ -37,6 +37,18 @@ const apiList: ApiList = {
     url: `${domain}/api/v1/movie/year`,
     desc: '년도별 영화 목록 조회'
   },
+  // 현재 상영 중인 영화 목록 조회
+  'getInTheaterMovie': {
+    method: 'GET',
+    url: `${domain}/api/v1/movie`,
+    desc: '현재 상영 중인 영화 목록 조회'
+  },
+  // 영화 세부 정보 조회
+  'getMovieDetail': {
+    method: 'GET',
+    url: `${domain}/api/v1/movie/`,
+    desc: '영화 세부 정보 조회'
+  },
 }
 
 export default apiList
