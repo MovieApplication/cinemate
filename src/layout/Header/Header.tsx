@@ -22,7 +22,7 @@ export default function Header(props: HeaderProps) {
 
   return (
     <header className={scrollValue > 100 ? header.blackHeader : header.header}>
-      <Link href="/src/pages">
+      <Link href="/">
         <Image
           src="/images/logo.png"
           alt="CINEMATE"

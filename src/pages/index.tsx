@@ -89,7 +89,7 @@ const Home: NextPage = () => {
 
   return popularList.length > 0 ? (
     <>
-      <div className={home.wrapper} style={{background: `url(${popularList[0].backdrop_path}) no-repeat center`, backgroundSize: '100%'}}>
+      <div className={home.wrapper} style={{backgroundImage: `linear-gradient(to left, transparent, black), url(${popularList[0].backdrop_path})`, backgroundSize: '100%'}}>
         <h4>{popularList[0].title}</h4>
         <p>{popularList[0].overview}</p>
       </div>

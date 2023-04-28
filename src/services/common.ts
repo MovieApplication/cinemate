@@ -3,8 +3,7 @@ import axios from "axios"
 
 export const GetApi = async ($api: Api, $param?: object) => {
   let option: object = {
-    withCredentials: true,
-    headers: {'api-key-auth':'01057212058'}
+    withCredentials: true
   }
 
   if ($api.method === 'GET') {
@@ -12,6 +11,36 @@ export const GetApi = async ($api: Api, $param?: object) => {
   } else {
     option = { ...option, ...$api, data: $param !== undefined ? $param : {} }
   }
+
+  return await axios(option)
+    .then((res) => {
+      try {
+        console.log(`%c [${$api.url}] response : `, 'background-color:red; color: white', res.data)
+
+        return res.data
+      } catch(e) {
+        console.log('e : ', e)
+      }
+    }).catch((err) => {
+      console.log('err : ' , err)
+
+      return 'FAIL'
+    })
+}
+
+export const GetApiPath = async ($api: Api, $param?: string | number) => {
+  let option: object = {
+    withCredentials: true
+  }
+
+  if ($param) {
+    $api = {
+      ...$api,
+      url: encodeURI($api.url + $param)
+    }
+  }
+
+  option = { ...option, ...$api }
 
   return await axios(option)
     .then((res) => {

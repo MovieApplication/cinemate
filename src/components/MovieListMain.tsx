@@ -8,6 +8,7 @@ import 'swiper/css/virtual'
 import home from 'styles/Home.module.scss'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faChevronLeft, faChevronRight, faCircleInfo} from "@fortawesome/free-solid-svg-icons"
+import Link from "next/link"
 
 interface MovieListProps {
   ListItem: MovieListItems[];
@@ -43,12 +44,14 @@ const MovieListMain = (props: MovieListProps) => {
                   height={260}
                 />
               </div>
-              <ul className={home.cover}>
-                <li><FontAwesomeIcon icon={faCircleInfo} /></li>
-                <li>{items.title}</li>
-                <li><span>평점</span> {items.vote_average} / 10</li>
-                <li>{items.overview}</li>
-              </ul>
+              <Link href={`/detail/${encodeURIComponent(items.id)}`}>
+                <ul className={home.cover}>
+                  <li><FontAwesomeIcon icon={faCircleInfo} /></li>
+                  <li>{items.title}</li>
+                  <li><span>평점</span> {items.vote_average} / 10</li>
+                  <li>{items.overview}</li>
+                </ul>
+              </Link>
             </SwiperSlide>
           ))
         }

@@ -1,11 +1,13 @@
 .wrapper {
   padding: 0 3rem 12rem;
-  background-color: grey;
+  background-color: #000;
   width: 100%;
   height: 550px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  background-repeat: no-repeat;
+  background-position: center;
 
   h4 {
     font-weight: 700;
