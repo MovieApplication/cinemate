@@ -14,13 +14,13 @@ const MovieList = dynamic(() => import('components/MovieList'))
 
 const MovieDetail = () => {
   const router = useRouter()
-  const [id] = router.query.movieId as string[]
+  const [movieId] = router.query.movieId as string[]
   const [detailData, setDetailData] = useState<MovieDetailItems>()
   const [similarData, setSimilarData] = useState<MovieListItems[]>([])
 
   // 영화 세부 정보 조회
   const fnGetMovieDetail = async () => {
-    await GetApiPath(apiList.getMovieDetail, id).then(res => {
+    await GetApiPath(apiList.getMovieDetail, movieId).then(res => {
       if (res !== 'FAIL') {
         setDetailData(res)
       }
@@ -29,7 +29,7 @@ const MovieDetail = () => {
 
   // 해당 영화와 유사한 영화 목록 조회
   const fnGetSimilarMovie = async () => {
-    await GetApiPath(apiList.getSimilarMovie, id).then(res => {
+    await GetApiPath(apiList.getSimilarMovie, movieId).then(res => {
       if (res !== 'FAIL') {
         setSimilarData(res.results)
       }
@@ -41,7 +41,7 @@ const MovieDetail = () => {
     fnGetMovieDetail().then(() =>
       fnGetSimilarMovie()
     )
-  },[id])
+  },[movieId])
 
   return detailData !== undefined ? (
     <div className={detail.wrapper}>
@@ -71,17 +71,21 @@ const MovieDetail = () => {
             <li>{detailData.overview}</li>
           </ul>
           {/* 비슷한 영화 추천 */}
-          <div className={detail.similar}>
-            <p>&lt;{detailData.title}&gt; 와 비슷한 영화</p>
-            <MovieList
-              detailList={true}
-              ListItem={similarData}
-              perView={4.5}
-              perGroup={4}
-              width={180}
-              height={260}
-            />
-          </div>
+          {
+            similarData.length > 0
+              ? <div className={detail.similar}>
+                <p>&lt;{detailData.title}&gt; 와 비슷한 영화</p>
+                <MovieList
+                  detailList={true}
+                  ListItem={similarData}
+                  perView={4.5}
+                  perGroup={4}
+                  width={180}
+                  height={260}
+                />
+              </div>
+              : <></>
+          }
         </div>
       </div>
     </div>

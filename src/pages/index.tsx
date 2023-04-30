@@ -104,7 +104,8 @@ const Home: NextPage = () => {
       {/* Movie List */}
       {
         movieListArr.map(data => (
-          <div className={home.list} key={data.title}>
+          data.item.length > 0
+          ? <div className={home.list} key={data.title}>
             <p>{data.title}</p>
             <MovieList
               detailList={false}
@@ -115,6 +116,7 @@ const Home: NextPage = () => {
               height={270}
             />
           </div>
+          : <></>
         ))
       }
     </>
