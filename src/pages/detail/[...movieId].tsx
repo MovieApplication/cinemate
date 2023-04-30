@@ -14,7 +14,7 @@ const MovieList = dynamic(() => import('components/MovieList'))
 
 const MovieDetail = () => {
   const router = useRouter()
-  const [id] = router.query.movieId
+  const [id] = router.query.movieId as string[]
   const [detailData, setDetailData] = useState<MovieDetailItems>()
   const [similarData, setSimilarData] = useState<MovieListItems[]>([])
 
