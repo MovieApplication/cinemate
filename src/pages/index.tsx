@@ -6,6 +6,9 @@ import {GetApi} from "services/common"
 import apiList from "utils/apiList"
 import {MovieListItems} from "utils/interface"
 import dynamic from "next/dynamic"
+import Link from "next/link"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
+import {faCircleInfo} from "@fortawesome/free-solid-svg-icons"
 
 // 해당 컴포넌트가 필요한 시점에만 로드
 const MovieList = dynamic(() => import('components/MovieList'))
@@ -92,6 +95,10 @@ const Home: NextPage = () => {
       <div className={home.wrapper} style={{backgroundImage: `linear-gradient(to left, transparent, black), url(${popularList[0].backdrop_path})`, backgroundSize: '100%'}}>
         <h4>{popularList[0].title}</h4>
         <p>{popularList[0].overview}</p>
+        <Link href={`/detail/${encodeURIComponent(popularList[0].id)}`}>
+          <FontAwesomeIcon icon={faCircleInfo} />
+          <span>상세 정보</span>
+        </Link>
       </div>
 
       {/* Movie List */}
@@ -105,7 +112,7 @@ const Home: NextPage = () => {
               perView={7.5}
               perGroup={7}
               width={200}
-              height={260}
+              height={270}
             />
           </div>
         ))

@@ -2,7 +2,7 @@
   padding: 0 3rem 12rem;
   background-color: #000;
   width: 100%;
-  height: 550px;
+  height: 650px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -10,8 +10,13 @@
   background-position: center;
 
   h4 {
+    width: 35%;
     font-weight: 700;
-    font-size: 30px;
+    font-size: 45px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
   }
 
   p {
@@ -21,6 +26,31 @@
     -webkit-line-clamp: 2;
     overflow: hidden;
     margin-top: .5rem;
+    font-size: 16px;
+  }
+
+  a {
+    background-color: rgba(109, 109, 110, 0.7);
+    width: fit-content;
+    height: fit-content;
+    padding: .5rem 1.8rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+    display: table;
+
+    svg {
+      width: 1.6rem;
+      height: 1.6rem;
+      display: table-cell;
+      vertical-align: middle;
+    }
+    span {
+      display: table-cell;
+      vertical-align: middle;
+      padding-left: .5rem;
+      font-size: 16px;
+      font-weight: 300;
+    }
   }
 }
 
