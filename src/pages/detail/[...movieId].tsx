@@ -36,10 +36,11 @@ const MovieDetail = () => {
     })
   }
 
-  // url query 변경 시: 세부 정보 + 유사한 영화 목록 조회
+  // url query 변경 시: 세부 정보 -> 유사한 영화 목록 조회
   useEffect(() => {
-    fnGetMovieDetail()
-    fnGetSimilarMovie()
+    fnGetMovieDetail().then(() =>
+      fnGetSimilarMovie()
+    )
   },[id])
 
   return detailData !== undefined ? (
