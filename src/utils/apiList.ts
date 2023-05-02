@@ -1,4 +1,4 @@
-const domain = 'http://localhost:8080'
+const domain = 'http://3.34.182.241:8080'
 
 export interface Api {
   method: string;
