@@ -18,6 +18,12 @@ const MovieDetail = () => {
   const [detailData, setDetailData] = useState<MovieDetailItems>()
   const [similarData, setSimilarData] = useState<MovieListItems[]>([])
 
+  const movieListArr = {
+    title: '비슷한 영화',
+    item: similarData,
+    page: 1
+  }
+
   // 영화 세부 정보 조회
   const fnGetMovieDetail = async () => {
     await GetApiPath(apiList.getMovieDetail, movieId).then(res => {
@@ -77,7 +83,7 @@ const MovieDetail = () => {
                 <p>&lt;{detailData.title}&gt; 와 비슷한 영화</p>
                 <MovieList
                   detailList={true}
-                  ListItem={similarData}
+                  listItem={movieListArr}
                   perView={4.5}
                   perGroup={4}
                   width={180}

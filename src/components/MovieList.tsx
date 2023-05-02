@@ -13,7 +13,8 @@ import Link from "next/link"
 
 interface MovieListProps {
   detailList: boolean;
-  ListItem: MovieListItems[];
+  listItem: { title: string; item: MovieListItems[]; page: number };
+  fnChangePage?($title: string, $page: number): void;
   perView: number;
   perGroup: number;
   width: number;
@@ -31,6 +32,7 @@ const MovieList = (props: MovieListProps) => {
         prevEl: '.swiper-button-prev',
         nextEl: '.swiper-button-next'
       }}
+      onReachEnd={() => props.fnChangePage(props.listItem.title,props.listItem.page + 1)}
     >
       <div className="swiper-button-prev">
         <FontAwesomeIcon icon={faChevronLeft} />
@@ -39,7 +41,7 @@ const MovieList = (props: MovieListProps) => {
         <FontAwesomeIcon icon={faChevronRight} />
       </div>
       {
-        props.ListItem.map((items, index) => (
+        props.listItem.item.map((items, index) => (
           <SwiperSlide key={items.id} virtualIndex={index}>
             <div className={items.adult ? home.adultIcon : ''}>
               <Image
@@ -53,7 +55,7 @@ const MovieList = (props: MovieListProps) => {
               <ul className={props.detailList ? detail.cover : home.cover}>
                 <li><FontAwesomeIcon icon={faCircleInfo} /></li>
                 <li>{items.title}</li>
-                <li><span>평점</span> {items.vote_average.toFixed(1)} / 10</li>
+                <li><span>평점</span> {items.vote_average?.toFixed(1)} / 10</li>
                 <li>{items.overview}</li>
               </ul>
             </Link>
