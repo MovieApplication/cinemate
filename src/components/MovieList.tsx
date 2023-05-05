@@ -14,7 +14,7 @@ import Link from "next/link"
 interface MovieListProps {
   detailList: boolean;
   listItem: { title: string; item: MovieListItems[]; page: number };
-  fnChangePage?($title: string, $page: number): void;
+  fnChangePage($page: number, $title?: string): void;
   perView: number;
   perGroup: number;
   width: number;
@@ -32,7 +32,7 @@ const MovieList = (props: MovieListProps) => {
         prevEl: '.swiper-button-prev',
         nextEl: '.swiper-button-next'
       }}
-      onReachEnd={() => props.fnChangePage(props.listItem.title,props.listItem.page + 1)}
+      onReachEnd={() => props.fnChangePage(props.listItem.page + 1, props.listItem.title)}
     >
       <div className="swiper-button-prev">
         <FontAwesomeIcon icon={faChevronLeft} />

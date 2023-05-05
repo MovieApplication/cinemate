@@ -50,8 +50,8 @@ const Home: NextPage = () => {
   }]
 
   // 실시간 인기 순위 영화 리스트 목록 조회
-  const fnGetPopularMovie = () => {
-    GetApi(apiList.getPopularMovie, {page: popularList.page}).then(res => {
+  const fnGetPopularMovie = async () => {
+    await GetApi(apiList.getPopularMovie, {page: popularList.page}).then(res => {
       if (res !== 'FAIL') {
         setPopularList({
           ...popularList,
@@ -62,8 +62,8 @@ const Home: NextPage = () => {
   }
 
   // 현재 상영 중인 영화
-  const fnGetInTheaterMovie = () => {
-    GetApi(apiList.getInTheaterMovie, {page: inTheaterList.page}).then(res => {
+  const fnGetInTheaterMovie = async () => {
+    await GetApi(apiList.getInTheaterMovie, {page: inTheaterList.page}).then(res => {
       if (res !== 'FAIL') {
         setInTheaterList({
           ...inTheaterList,
@@ -74,8 +74,8 @@ const Home: NextPage = () => {
   }
 
   // 최근에 개봉한 순 목록 조회 (현재날짜기준)
-  const fnGetReleaseMovie = () => {
-    GetApi(apiList.getReleaseMovie, {page: releaseList.page}).then(res => {
+  const fnGetReleaseMovie = async () => {
+    await GetApi(apiList.getReleaseMovie, {page: releaseList.page}).then(res => {
       if (res !== 'FAIL') {
         setReleaseList({
           ...releaseList,
@@ -86,8 +86,8 @@ const Home: NextPage = () => {
   }
 
   // 평점 높은순으로 영화 목록 조회
-  const fnGetVoteMovie = () => {
-    GetApi(apiList.getVoteMovie, {page: voteList.page}).then(res => {
+  const fnGetVoteMovie = async () => {
+    await GetApi(apiList.getVoteMovie, {page: voteList.page}).then(res => {
       if (res !== 'FAIL') {
         setVoteList({
           ...voteList,
@@ -98,8 +98,8 @@ const Home: NextPage = () => {
   }
 
   // 년도별 영화 목록 조회
-  const fnGetYearMovie = () => {
-    GetApi(apiList.getYearMovie, {page: yearList.page}).then(res => {
+  const fnGetYearMovie = async () => {
+    await GetApi(apiList.getYearMovie, {page: yearList.page}).then(res => {
       if (res !== 'FAIL') {
         setYearList({
           ...yearList,
@@ -110,7 +110,7 @@ const Home: NextPage = () => {
   }
 
   // Infinite Swiper (pagination)
-  const fnChangePage = ($title: string, $page: number) => {
+  const fnChangePage = ($page: number, $title: string) => {
     if ($title === '실시간 인기 순위 영화') {
       setPopularList({...popularList, page: $page})
     } else if ($title === '현재 상영 중인 영화') {
@@ -125,23 +125,35 @@ const Home: NextPage = () => {
   }
 
   useEffect(() => {
-    fnGetPopularMovie()
+    fnGetPopularMovie().then(() =>
+      fnGetInTheaterMovie().then(() =>
+        fnGetReleaseMovie().then(() =>
+          fnGetVoteMovie().then(() =>
+            fnGetYearMovie()
+          )
+        )
+      )
+    )
+  },[])
+
+  useEffect(() => {
+    if (popularList.page !== 1) fnGetPopularMovie()
   },[popularList.page])
 
   useEffect(() => {
-    fnGetInTheaterMovie()
+    if (inTheaterList.page !== 1) fnGetInTheaterMovie()
   },[inTheaterList.page])
 
   useEffect(() => {
-    fnGetReleaseMovie()
+    if (releaseList.page !== 1) fnGetReleaseMovie()
   },[releaseList.page])
 
   useEffect(() => {
-    fnGetVoteMovie()
+    if (voteList.page !== 1) fnGetVoteMovie()
   },[voteList.page])
 
   useEffect(() => {
-    fnGetYearMovie()
+    if (yearList.page !== 1) fnGetYearMovie()
   },[yearList.page])
 
   return popularList.results.length > 0 ? (

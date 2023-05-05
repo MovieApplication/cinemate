@@ -28,7 +28,7 @@ export const GetApi = async ($api: Api, $param?: object) => {
     })
 }
 
-export const GetApiPath = async ($api: Api, $param?: string | number) => {
+export const GetApiPath = async ($api: Api, $param?: string | number, $page?: object) => {
   let option: object = {
     withCredentials: true
   }
@@ -40,7 +40,11 @@ export const GetApiPath = async ($api: Api, $param?: string | number) => {
     }
   }
 
-  option = { ...option, ...$api }
+  if ($api.method === 'GET') {
+    option = { ...option, ...$api, params: $page !== undefined ? $page : {} }
+  } else {
+    option = { ...option, ...$api, data: $page !== undefined ? $page : {} }
+  }
 
   return await axios(option)
     .then((res) => {

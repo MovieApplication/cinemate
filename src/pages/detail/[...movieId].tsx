@@ -2,7 +2,7 @@ import {useRouter} from "next/router"
 import {useEffect, useState} from "react"
 import {GetApiPath} from "services/common"
 import apiList from "utils/apiList"
-import {MovieDetailItems, MovieListItems} from "utils/interface"
+import {MovieDetailItems, MovieResult} from "utils/interface"
 import detail from "./Detail.module.scss"
 import Image from "next/image"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
@@ -12,16 +12,23 @@ import dynamic from "next/dynamic"
 // 해당 컴포넌트가 필요한 시점에만 로드
 const MovieList = dynamic(() => import('components/MovieList'))
 
+const MovieResultInit: MovieResult = {
+  page: 1,
+  results: [],
+  total_pages: 0,
+  total_results: 0
+}
+
 const MovieDetail = () => {
   const router = useRouter()
   const [movieId] = router.query.movieId as string[]
   const [detailData, setDetailData] = useState<MovieDetailItems>()
-  const [similarData, setSimilarData] = useState<MovieListItems[]>([])
+  const [similarData, setSimilarData] = useState<MovieResult>(MovieResultInit)
 
   const movieListArr = {
     title: '비슷한 영화',
-    item: similarData,
-    page: 1
+    item: similarData.results,
+    page: similarData.page
   }
 
   // 영화 세부 정보 조회
@@ -35,11 +42,19 @@ const MovieDetail = () => {
 
   // 해당 영화와 유사한 영화 목록 조회
   const fnGetSimilarMovie = async () => {
-    await GetApiPath(apiList.getSimilarMovie, movieId).then(res => {
+    await GetApiPath(apiList.getSimilarMovie, movieId, {page: similarData.page}).then(res => {
       if (res !== 'FAIL') {
-        setSimilarData(res.results)
+        setSimilarData({
+          ...similarData,
+          results: [...similarData.results, ...res.results]
+        })
       }
     })
+  }
+
+  // Infinite Swiper (pagination)
+  const fnChangePage = ($page: number) => {
+    setSimilarData({...similarData, page: $page})
   }
 
   // url query 변경 시: 세부 정보 -> 유사한 영화 목록 조회
@@ -48,6 +63,10 @@ const MovieDetail = () => {
       fnGetSimilarMovie()
     )
   },[movieId])
+
+  useEffect(() => {
+    if (similarData.page !== 1) fnGetSimilarMovie()
+  },[similarData.page])
 
   return detailData !== undefined ? (
     <div className={detail.wrapper}>
@@ -78,12 +97,13 @@ const MovieDetail = () => {
           </ul>
           {/* 비슷한 영화 추천 */}
           {
-            similarData.length > 0
+            similarData.results.length > 0
               ? <div className={detail.similar}>
                 <p>&lt;{detailData.title}&gt; 와 비슷한 영화</p>
                 <MovieList
                   detailList={true}
                   listItem={movieListArr}
+                  fnChangePage={fnChangePage}
                   perView={4.5}
                   perGroup={4}
                   width={180}
