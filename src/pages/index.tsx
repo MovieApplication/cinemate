@@ -28,13 +28,13 @@ const Home: NextPage = () => {
   const [yearList, setYearList] = useState<MovieResult>(MovieResultInit)
 
   const movieListArr = [{
-    title: '실시간 인기 순위 영화',
-    item: popularList.results,
-    page: popularList.page
-  }, {
     title: '현재 상영 중인 영화',
     item: inTheaterList.results,
     page: inTheaterList.page
+  }, {
+    title: '실시간 인기 순위 영화',
+    item: popularList.results,
+    page: popularList.page
   }, {
     title: '높은 평점을 기록한 영화',
     item: voteList.results,
@@ -171,7 +171,7 @@ const Home: NextPage = () => {
       {
         movieListArr.map(data => (
           data.item.length > 0
-          ? <div className={home.list} key={data.title}>
+          ? <div className={`${home.list} ${data.title === '실시간 인기 순위 영화' ? home.popular : ''}`} key={data.title}>
             <p>{data.title}</p>
             <MovieList
               detailList={false}
