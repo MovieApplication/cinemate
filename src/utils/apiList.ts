@@ -55,6 +55,12 @@ const apiList: ApiList = {
     url: `${domain}/api/v1/movie/similar/`,
     desc: '해당 영화와 유사한 영화 목록 조회'
   },
+  // 리뷰 목록 조회
+  'getReview': {
+    method: 'GET',
+    url: `${domain}/api/v1/review/`,
+    desc: '리뷰 목록 조회'
+  },
 }
 
 export default apiList
