@@ -55,6 +55,7 @@
 }
 
 .list {
+  position: relative;
   padding: 2rem 3rem;
   p {
     font-size: 18px;
@@ -67,20 +68,18 @@
 }
 
 .popular {
-  position: relative;
   .popularItem::before {
     content: var(--idx);
     display: block;
     position: absolute;
-    top: -40px;
-    left: -5px;
+    bottom: -50px;
+    left: -65px;
     color: rgba(0,0,0,0.5);
-    font-size: 110px;
+    font-size: 150px;
     font-weight: 700;
     font-style: italic;
-    -webkit-text-stroke: 2px #fff;
+    -webkit-text-stroke: 2px #bbb;
     letter-spacing: -10px;
-    z-index: 20;
   }
 }
 

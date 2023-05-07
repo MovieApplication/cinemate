@@ -39,6 +39,14 @@ li {list-style: none;}
   height: 100%;
 }
 
+.Home_popular__lyq2Y .swiper-wrapper {
+  padding: 0 4rem 1rem;
+}
+
+.Home_popular__lyq2Y .swiper-wrapper > div {
+  margin-left: 1.5rem;
+}
+
 .swiper-button-prev {
   display: block;
   font-size: 1.2rem;
