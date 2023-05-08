@@ -1,4 +1,4 @@
-import {useRouter} from "next/router"
+import router from "next/router"
 import {useEffect, useState} from "react"
 import {GetApiPath} from "services/common"
 import apiList from "utils/apiList"
@@ -21,8 +21,8 @@ const MovieResultInit: MovieResult = {
 }
 
 const MovieDetail = () => {
-  const router = useRouter()
-  const [movieId] = router.query.movieId as string[]
+  const [movieId, setMovieId] = useState('')
+  // const movieId = router.query.movieId as string
   const [detailData, setDetailData] = useState<MovieDetailItems>()
   const [similarData, setSimilarData] = useState<MovieResult>(MovieResultInit)
   const [reviewList, setReviewList] = useState<ReviewItem[]>([])
@@ -68,6 +68,11 @@ const MovieDetail = () => {
   const fnChangePage = ($page: number) => {
     setSimilarData({...similarData, page: $page})
   }
+
+  // Pre-rendering error 해결
+  useEffect(() => {
+    setMovieId(router.query.movieId as string)
+  },[])
 
   // url query 변경 시: 세부 정보 -> 유사한 영화 목록 조회
   useEffect(() => {
