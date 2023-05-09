@@ -22,7 +22,6 @@ const MovieResultInit: MovieResult = {
 
 const MovieDetail = () => {
   const [movieId, setMovieId] = useState('')
-  // const movieId = router.query.movieId as string
   const [detailData, setDetailData] = useState<MovieDetailItems>()
   const [similarData, setSimilarData] = useState<MovieResult>(MovieResultInit)
   const [reviewList, setReviewList] = useState<ReviewItem[]>([])
@@ -69,18 +68,17 @@ const MovieDetail = () => {
     setSimilarData({...similarData, page: $page})
   }
 
-  // Pre-rendering error 해결
-  useEffect(() => {
-    setMovieId(router.query.movieId as string)
-  },[])
-
   // url query 변경 시: 세부 정보 -> 유사한 영화 목록 조회
   useEffect(() => {
-    fnGetMovieDetail().then(() =>
-      fnGetSimilarMovie().then(() =>
-        fnGetReview()
+    setMovieId(router.query.movieId as string)
+
+    if (movieId !== '') {
+      fnGetMovieDetail().then(() =>
+        fnGetSimilarMovie().then(() =>
+          fnGetReview()
+        )
       )
-    )
+    }
   },[movieId])
 
   useEffect(() => {
