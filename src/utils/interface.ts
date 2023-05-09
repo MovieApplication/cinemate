@@ -50,6 +50,21 @@ export interface MovieDetailItems {
 }
 
 export interface ReviewItem {
+  review_id: string;
   userId: string;
   content: string;
+}
+
+
+export interface PaginationInfo {
+  currentPageNo: number;
+  empty: boolean;
+  endPage: boolean;
+  firstPage: number;
+  lastPage: number;
+  pageSize: number;
+  recordsPerPage: number;
+  startPage: boolean;
+  totalPageCount: number;
+  totalRecordCount: number;
 }

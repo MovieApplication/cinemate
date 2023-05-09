@@ -59,7 +59,7 @@ const MovieDetail = () => {
     await GetApiPath(apiList.getReview, movieId).then(res => {
       if (res !== 'FAIL') {
         console.log('res : ', res)
-        // setReviewList(res)
+        setReviewList(res.items)
       }
     })
   }
