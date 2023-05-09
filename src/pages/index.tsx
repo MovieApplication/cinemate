@@ -26,6 +26,7 @@ const Home: NextPage = () => {
   const [releaseList, setReleaseList] = useState<MovieResult>(MovieResultInit)
   const [voteList, setVoteList] = useState<MovieResult>(MovieResultInit)
   const [yearList, setYearList] = useState<MovieResult>(MovieResultInit)
+  const [innerWidthVal, setInnerWidthVal] = useState(0)
 
   const movieListArr = [{
     title: '현재 상영 중인 영화',
@@ -125,6 +126,8 @@ const Home: NextPage = () => {
   }
 
   useEffect(() => {
+    setInnerWidthVal(window.innerWidth)
+
     fnGetPopularMovie().then(() =>
       fnGetInTheaterMovie().then(() =>
         fnGetReleaseMovie().then(() =>
@@ -177,10 +180,10 @@ const Home: NextPage = () => {
               detailList={false}
               listItem={data}
               fnChangePage={fnChangePage}
-              perView={7.5}
-              perGroup={7}
-              width={200}
-              height={270}
+              perView={innerWidthVal >= 1920 ? 7.5 : 6}
+              perGroup={innerWidthVal >= 1920 ? 7.5 : 6}
+              width={innerWidthVal >= 1920 ? 210 : 180}
+              height={innerWidthVal >= 1920 ? 280 : 250}
             />
           </div>
           : <></>
