@@ -25,7 +25,6 @@ const MovieDetail = () => {
   const [detailData, setDetailData] = useState<MovieDetailItems>()
   const [similarData, setSimilarData] = useState<MovieResult>(MovieResultInit)
   const [reviewList, setReviewList] = useState<ReviewItem[]>([])
-  const [innerWidthVal, setInnerWidthVal] = useState(0)
 
   const movieListArr = {
     title: '비슷한 영화',
@@ -71,7 +70,6 @@ const MovieDetail = () => {
 
   // url query 변경 시: 세부 정보 -> 유사한 영화 목록 조회
   useEffect(() => {
-    setInnerWidthVal(window.innerWidth)
     setMovieId(router.query.movieId as string)
 
     if (movieId !== '') {
@@ -123,7 +121,7 @@ const MovieDetail = () => {
                   detailList={true}
                   listItem={movieListArr}
                   fnChangePage={fnChangePage}
-                  perView={innerWidthVal >= 1920 ? 4.3 : 4}
+                  perView={4.3}
                   perGroup={4}
                   width={170}
                   height={230}
