@@ -8,7 +8,7 @@ interface ReviewListProps {
 }
 
 const ReviewList = (props: ReviewListProps) => {
-  return (
+  return props.item ? (
     <li>
       <div className={detail.iconBox}>
         <FontAwesomeIcon icon={faComments} />
@@ -18,7 +18,7 @@ const ReviewList = (props: ReviewListProps) => {
         <p>{props.item.content}</p>
       </div>
     </li>
-  )
+  ) : <>err</>
 }
 
 export default ReviewList
