@@ -43,7 +43,7 @@ const MovieList = (props: MovieListProps) => {
       {
         props.listItem.item.map((items, index) => (
           <SwiperSlide key={items.id} virtualIndex={index}>
-            <div className={!props.detailList ? home.popularItem : ''} >
+            <div className={!props.detailList ? home.popularItem : ''} data-idx={index + 1}>
               <Image
                 src={items.poster_path === 'https://image.tmdb.org/t/p/w500/null' ? '/images/none_poster.png' : items.poster_path}
                 alt={items.title}
