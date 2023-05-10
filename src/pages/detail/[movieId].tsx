@@ -2,7 +2,7 @@ import router from "next/router"
 import {useEffect, useState} from "react"
 import {GetApiPath} from "services/common"
 import apiList from "utils/apiList"
-import {MovieDetailItems, MovieResult, ReviewItem} from "utils/interface"
+import {MovieDetailItems, MovieResult} from "utils/interface"
 import detail from "./Detail.module.scss"
 import Image from "next/image"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
@@ -24,7 +24,6 @@ const MovieDetail = () => {
   const [movieId, setMovieId] = useState('')
   const [detailData, setDetailData] = useState<MovieDetailItems>()
   const [similarData, setSimilarData] = useState<MovieResult>(MovieResultInit)
-  const [reviewList, setReviewList] = useState<ReviewItem[]>([])
 
   const movieListArr = {
     title: '비슷한 영화',
@@ -53,16 +52,6 @@ const MovieDetail = () => {
     })
   }
 
-  // 리뷰 목록 조회
-  const fnGetReview = async () => {
-    await GetApiPath(apiList.getReview, movieId).then(res => {
-      if (res !== 'FAIL') {
-        console.log('res : ', res)
-        setReviewList(res.items)
-      }
-    })
-  }
-
   // Infinite Swiper (pagination)
   const fnChangePage = ($page: number) => {
     setSimilarData({...similarData, page: $page})
@@ -74,9 +63,7 @@ const MovieDetail = () => {
 
     if (movieId !== '') {
       fnGetMovieDetail().then(() =>
-        fnGetSimilarMovie().then(() =>
-          fnGetReview()
-        )
+        fnGetSimilarMovie()
       )
     }
   },[movieId])
@@ -133,23 +120,7 @@ const MovieDetail = () => {
       </div>
 
       {/* 리뷰 컴포넌트 */}
-      {
-        reviewList.length > 0
-        ? <div className={detail.review}>
-          <div className={detail.title}>
-            <p>해당 영화 리뷰</p>
-            <button type='button'>리뷰 쓰기</button>
-          </div>
-          <ul>
-            {
-              reviewList.map(item => (
-                <Review item={item} key={item.userId} />
-              ))
-            }
-          </ul>
-        </div>
-        : <></>
-      }
+      <Review movieId={movieId}/>
     </div>
   ) : <>err</>
 }
