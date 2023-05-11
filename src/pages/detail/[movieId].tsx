@@ -1,4 +1,4 @@
-import router from "next/router"
+import {useRouter} from "next/router"
 import {useEffect, useState} from "react"
 import {GetApiPath} from "services/common"
 import apiList from "utils/apiList"
@@ -21,7 +21,8 @@ const MovieResultInit: MovieResult = {
 }
 
 const MovieDetail = () => {
-  const [movieId, setMovieId] = useState('')
+  const router = useRouter()
+  const movieId = router.query.movieId as string
   const [detailData, setDetailData] = useState<MovieDetailItems>()
   const [similarData, setSimilarData] = useState<MovieResult>(MovieResultInit)
 
@@ -59,8 +60,6 @@ const MovieDetail = () => {
 
   // url query 변경 시: 세부 정보 -> 유사한 영화 목록 조회
   useEffect(() => {
-    setMovieId(router.query.movieId as string)
-
     if (movieId !== '') {
       fnGetMovieDetail().then(() =>
         fnGetSimilarMovie()

@@ -31,8 +31,8 @@ const Review = (props: ReviewProps) => {
   // 리뷰 목록 조회
   const fnGetReview = () => {
     const pageParams = {
-      size: paginationInfo.recordsPerPage,
-      page: currentPageNo
+      recordsPerPage: paginationInfo.recordsPerPage,
+      currentPageNo
     }
 
     GetApiPath(apiList.getReview, props.movieId, pageParams).then(res => {

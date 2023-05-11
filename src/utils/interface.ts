@@ -55,7 +55,6 @@ export interface ReviewItem {
   content: string;
 }
 
-
 export interface PaginationInfo {
   currentPageNo: number;
   empty: boolean;
