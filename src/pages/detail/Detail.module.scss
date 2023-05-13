@@ -152,6 +152,7 @@
   }
 }
 
+// 리뷰 컴포넌트
 .review {
   width: 1280px;
   margin: 4rem auto;
@@ -231,4 +232,80 @@
   font-size: 18px;
   line-height: 30px;
   color: #999;
+}
+
+// 모달창
+.reviewAddModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.6);
+  z-index: 150;
+}
+
+.addBox {
+  background-color: #111;
+  width: 45vw;
+  height: 600px;
+  padding: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 3px;
+  box-shadow: rgba(255, 255, 255, 0.05) 0px 6px 24px 0px, rgba(255, 255, 255, 0.08) 0px 0px 0px 1px;
+
+  h2 {
+    font-size: 30px;
+    font-weight: 400;
+  }
+
+  svg {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    cursor: pointer;
+  }
+
+  .addText {
+    input {
+      padding: 5px 10px 5px;
+      border: 1px solid #aaa;
+      border-radius: 3px;
+      width: 30%;
+      height: 40px;
+      margin-top: 35px;
+    }
+
+    textarea {
+      display: block;
+      padding: 10px 10px 5px;
+      border: 1px solid #aaa;
+      border-radius: 3px;
+      width: 100%;
+      height: 300px;
+      margin-top: 30px;
+      background-color: transparent;
+    }
+
+    p {
+      color: #824EFF;
+      margin-top: 5px;
+      margin-left: 2px;
+    }
+  }
+
+  button {
+    font-size: 16px;
+    font-weight: 400;
+    background-color: #eee;
+    color: #000;
+    padding: 10px 18px;
+    border-radius: 3px;
+    position: absolute;
+    right: 2rem;
+    bottom: 2rem;
+  }
 }

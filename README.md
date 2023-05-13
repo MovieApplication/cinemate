@@ -16,14 +16,15 @@
 상세보기 (Detail page)
 - 영화 포스터 클릭 시 해당 영화 상세 정보 확인
 - 클릭한 영화와 비슷한 영화 추천
-- 해당 영화 리뷰 확인
+- 해당 영화 리뷰 확인 (paging)
+- 해당 영화 리뷰 등록/수정 (로그인 필요, 폼 검증)
 
 
 ***
 
 ## _Detail_
 [ SCSS ]
-- style={{'--idx': `'${index + 1}'`}}를 통해 index 값을 넘겨주어 scss 파일 내에서 `var(--idx)` 스타일링
+- `data-idx={index + 1}`를 통해 index 값을 넘겨주어 scss 파일 내에서 `attr(data-idx);` 스타일링
 
 [ Next.js ]
 - `CSS Modules` : paint 하는데 필요한 최소한의 CSS만 로드
