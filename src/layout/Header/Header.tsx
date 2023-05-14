@@ -5,12 +5,7 @@ import header from './Header.module.scss'
 import {KAKAO_AUTH_URL} from "services/common"
 import KakaoLogo from "../../../public/images/kakao_login_small.png"
 
-interface HeaderProps {
-  searchIcon: boolean;
-  toggleSearchIcon(): void;
-}
-
-export default function Header(props: HeaderProps) {
+export default function Header() {
   const [scrollValue, setScrollValue] = useState(0)
 
   const updateScroll = () => setScrollValue(window.scrollY || document.documentElement.scrollTop)
@@ -34,23 +29,6 @@ export default function Header(props: HeaderProps) {
       <Link href={KAKAO_AUTH_URL}>
         <Image src={KakaoLogo} alt="카카오 로그인"/>
       </Link>
-      {/*{*/}
-      {/*  props.searchIcon*/}
-      {/*    ? <Link href="/search">*/}
-      {/*      <FontAwesomeIcon*/}
-      {/*        icon={faUser}*/}
-      {/*        height={25}*/}
-      {/*        onClick={props.toggleSearchIcon}*/}
-      {/*      />*/}
-      {/*    </Link>*/}
-      {/*    : <Link href="/">*/}
-      {/*      <FontAwesomeIcon*/}
-      {/*        icon={faXmark}*/}
-      {/*        height={25}*/}
-      {/*        onClick={props.toggleSearchIcon}*/}
-      {/*      />*/}
-      {/*    </Link>*/}
-      {/*}*/}
     </header>
   )
 }
