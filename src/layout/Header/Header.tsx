@@ -1,9 +1,9 @@
-import header from './Header.module.scss'
-import Image from "next/image"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faMagnifyingGlass, faXmark } from "@fortawesome/free-solid-svg-icons"
-import Link from "next/link"
 import {useEffect, useState} from "react"
+import Image from "next/image"
+import Link from "next/link"
+import header from './Header.module.scss'
+import {KAKAO_AUTH_URL} from "services/common"
+import KakaoLogo from "../../../public/images/kakao_login_small.png"
 
 interface HeaderProps {
   searchIcon: boolean;
@@ -30,23 +30,27 @@ export default function Header(props: HeaderProps) {
           height={30}
         />
       </Link>
-      {
-        props.searchIcon
-          ? <Link href="/search">
-            <FontAwesomeIcon
-              icon={faMagnifyingGlass}
-              height={25}
-              onClick={props.toggleSearchIcon}
-            />
-          </Link>
-          : <Link href="/">
-            <FontAwesomeIcon
-              icon={faXmark}
-              height={25}
-              onClick={props.toggleSearchIcon}
-            />
-          </Link>
-      }
+
+      <Link href={KAKAO_AUTH_URL}>
+        <Image src={KakaoLogo} alt="카카오 로그인"/>
+      </Link>
+      {/*{*/}
+      {/*  props.searchIcon*/}
+      {/*    ? <Link href="/search">*/}
+      {/*      <FontAwesomeIcon*/}
+      {/*        icon={faUser}*/}
+      {/*        height={25}*/}
+      {/*        onClick={props.toggleSearchIcon}*/}
+      {/*      />*/}
+      {/*    </Link>*/}
+      {/*    : <Link href="/">*/}
+      {/*      <FontAwesomeIcon*/}
+      {/*        icon={faXmark}*/}
+      {/*        height={25}*/}
+      {/*        onClick={props.toggleSearchIcon}*/}
+      {/*      />*/}
+      {/*    </Link>*/}
+      {/*}*/}
     </header>
   )
 }
