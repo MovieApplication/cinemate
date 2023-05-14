@@ -3,7 +3,7 @@ import detail from "pages/detail/Detail.module.scss"
 import {faXmark} from "@fortawesome/free-solid-svg-icons"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import React, {useEffect, useState} from "react"
-import {hangulRegExp} from "utils/validation";
+import {hangulRegExp} from "utils/validation"
 
 interface ReviewAddProps {
   currentReview: ReviewItem;
