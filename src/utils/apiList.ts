@@ -61,6 +61,18 @@ const apiList: ApiList = {
     url: `${domain}/api/v1/review/`,
     desc: '리뷰 목록 조회'
   },
+  // 유저 등록
+  'userInfo': {
+    method: 'POST',
+    url: `${domain}/api/v1/user/info`,
+    desc: '유저 등록'
+  },
+  // 로그인 (토큰 획득)
+  'userLogin': {
+    method: 'POST',
+    url: `${domain}/api/v1/user/login/`,
+    desc: '로그인 (토큰 획득)'
+  },
 }
 
 export default apiList
