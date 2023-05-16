@@ -3,7 +3,7 @@ import {useEffect, useState} from "react"
 import { useRouter } from 'next/router'
 import Spinner from "../../../public/images/Spinner.gif"
 import Image from "next/image"
-import {CLIENT_ID, GetApi, GetApiPath, REDIRECT_URI} from "services/common"
+import {GetApi, GetApiPath, CLIENT_ID, REDIRECT_URI, sAlert, Data} from "services/common"
 import axios from "axios"
 import apiList from "utils/apiList"
 
@@ -89,7 +89,15 @@ const Kakao = () => {
   const fnUserLogin = async ($nickname: string) => {
     await GetApiPath(apiList.userLogin, $nickname).then(res => {
       if (res !== 'FAIL') {
-        router.push('/')
+        Data.set('login', res)
+
+        sAlert({
+          icon: 'success',
+          html: 'CINEMATE 회원가입이<br>성공적으로 완료 되었습니다.',
+          didClose: () => {
+            router.push('/')
+          }
+        })
       }
     })
   }

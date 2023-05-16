@@ -115,3 +115,19 @@ button {
   height: 100px;
   margin-bottom: 20px;
 }
+
+.swal2-popup {
+  display: none;
+  position: relative !important;
+  box-sizing: border-box !important;
+  grid-template-columns: minmax(0, 100%) !important;
+  width: 32em !important;
+  max-width: 100% !important;
+  padding: 0 0 1.25em !important;
+  border: none !important;
+  border-radius: 5px !important;
+  background: #19191a !important;
+  color: #b0b0b0 !important;
+  font-family: inherit !important;
+  font-size: 1rem !important;
+}
