@@ -1,8 +1,9 @@
+import React, {useEffect, useState} from "react"
+import {useRouter} from "next/router"
 import detail from "pages/detail/Detail.module.scss"
 import {PaginationInfo, ReviewItem} from "utils/interface"
 import ReviewList from "pages/detail/components/ReviewList"
-import React, {useEffect, useState} from "react"
-import {GetApiPath} from "services/common"
+import {Data, GetApiPath, KAKAO_AUTH_URL, sAlert} from "services/common"
 import apiList from "utils/apiList"
 import Paging from "components/Paging"
 import ModalReviewAdd from "pages/detail/components/ModalReviewAdd"
@@ -34,13 +35,27 @@ const Review = (props: ReviewProps) => {
   const [reviewList, setReviewList] = useState<ReviewItem[]>([])
   const [paginationInfo, setPaginationInfo] = useState<PaginationInfo>(paginationInfoInit)
   const [currentPageNo, setCurrentPageNo] = useState<number>(1)
-
   // 현재 리뷰 데이터
   const [currentReview, setCurrentReview] = useState<ReviewItem>(ReviewItemInit)
 
+  const router = useRouter()
+
   // 리뷰 등록/수정 모달창 컨트롤
   const [reviewModalFlag, setReviewModalFlag] = useState<boolean>(false)
-  const toggleReviewModal = () => setReviewModalFlag(!reviewModalFlag)
+  const toggleReviewModal = () => {
+    if (Data.get('login') === null) {
+      sAlert({
+        html: '로그인 후 이용 가능 합니다.<br>로그인 페이지로 이동 하시겠습니까?',
+        showCancelButton: true
+      }).then((res: any) => {
+        if (res.isConfirmed) {
+          router.push(KAKAO_AUTH_URL)
+        }
+      })
+    } else {
+      setReviewModalFlag(!reviewModalFlag)
+    }
+  }
 
   // 리뷰 목록 조회
   const fnGetReview = () => {
