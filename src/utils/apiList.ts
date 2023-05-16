@@ -61,6 +61,12 @@ const apiList: ApiList = {
     url: `${domain}/api/v1/review/`,
     desc: '리뷰 목록 조회'
   },
+  // 유저 조회
+  'userInfoCheck': {
+    method: 'GET',
+    url: `${domain}/api/v1/user/info/`,
+    desc: '유저 조회'
+  },
   // 유저 등록
   'userInfo': {
     method: 'POST',

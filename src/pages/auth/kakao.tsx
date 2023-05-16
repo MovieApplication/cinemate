@@ -14,7 +14,7 @@ const Kakao = () => {
   const router = useRouter()
 
   // 카카오 로그인 : 토큰 발급
-  const fnGetKakaoOauthToken = () => {
+  const fnGetKakaoOauthToken = async () => {
     const makeFormData = params => {
       const searchParams = new URLSearchParams()
       Object.keys(params).forEach(key => {
@@ -24,7 +24,7 @@ const Kakao = () => {
       return searchParams
     }
 
-    axios({
+    await axios({
       method: 'POST',
       headers: {
         'content-type': 'application/x-www-form-urlencoded;charset=utf-8',
@@ -46,8 +46,8 @@ const Kakao = () => {
   }
 
   // 카카오 로그인 : 사용자 정보 받기
-  const fnGetKakaoUserInfo = () => {
-    axios({
+  const fnGetKakaoUserInfo = async () => {
+    await axios({
       method: 'GET',
       headers: {
         "Authorization": `Bearer ${kakaoAccessToken}`
@@ -55,25 +55,38 @@ const Kakao = () => {
       url: "https://kapi.kakao.com/v2/user/me",
     }).then(res => {
       try {
-        fnGetUserInfo(res.data.kakao_account.profile.nickname)
-        fnGetUserLogin(res.data.kakao_account.profile.nickname)
+        fnUserInfoCheck(res.data.id.toString(), res.data.kakao_account.profile.nickname)
       } catch (e) {
         console.log('e : ', e)
       }
     })
   }
 
-  // 유저 등록
-  const fnGetUserInfo = async ($nickname: string) => {
-    await GetApi(apiList.userInfo, {nickname: $nickname}).then(res => {
-      if (res !== 'FAIL') {
-        console.log('res : ', res)
+  // 유저 조회
+  const fnUserInfoCheck = ($kakaoId: string, $nickname: string) => {
+    GetApiPath(apiList.userInfoCheck, $kakaoId).then($res => {
+      // 기존 유저일 경우 : 로그인
+      if ($res === true) {
+        fnUserLogin($kakaoId)
+      } else {
+        // 유저가 아닐 경우 : 유저 등록 -> 로그인
+        fnAddUserInfo($kakaoId, $nickname).then(() =>
+          fnUserLogin($kakaoId)
+        )
       }
     })
   }
 
+  // 유저 등록
+  const fnAddUserInfo = async ($kakaoId: string, $nickname: string) => {
+    await GetApi(apiList.userInfo, {
+      kakaoId: $kakaoId,
+      userNickname: $nickname
+    })
+  }
+
   // 로그인 (토큰 획득)
-  const fnGetUserLogin = async ($nickname: string) => {
+  const fnUserLogin = async ($nickname: string) => {
     await GetApiPath(apiList.userLogin, $nickname).then(res => {
       if (res !== 'FAIL') {
         router.push('/')
@@ -82,15 +95,11 @@ const Kakao = () => {
   }
 
   useEffect(() => {
-    if (code !== null) {
-      fnGetKakaoOauthToken()
-    }
+    if (code !== null) fnGetKakaoOauthToken()
   },[code])
 
   useEffect(() => {
-    if (kakaoAccessToken !== "") {
-      fnGetKakaoUserInfo()
-    }
+    if (kakaoAccessToken !== "") fnGetKakaoUserInfo()
   },[kakaoAccessToken])
 
   return (
