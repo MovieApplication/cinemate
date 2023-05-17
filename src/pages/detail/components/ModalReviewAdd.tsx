@@ -10,6 +10,7 @@ import apiList from "utils/apiList"
 interface ReviewAddProps {
   currentReview: ReviewItem;
   toggleReviewModal(): void;
+  fnAddNewReview(): void;
 }
 
 const reviewItemInit: ReviewItem = {
@@ -54,10 +55,7 @@ const ModalReviewAdd = (props: ReviewAddProps) => {
 
         GetApi($api, $param).then(res => {
           if (res !== 'FAIL') {
-            sAlert({
-              icon: 'success',
-              html: '리뷰가 등록 되었습니다.'
-            })
+            props.fnAddNewReview()
           }
         })
       }

@@ -81,6 +81,13 @@ const apiList: ApiList = {
     desc: '리뷰 수정',
     public: true
   },
+  // 리뷰 삭제
+  'deleteReview': {
+    method: 'DELETE',
+    url: `${domain}/api/v1/review/`,
+    desc: '리뷰 삭제',
+    public: true
+  },
   /*
   로그인
   * */

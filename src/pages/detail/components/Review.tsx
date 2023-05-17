@@ -73,8 +73,8 @@ const Review = (props: ReviewProps) => {
   }
 
   // 페이징
-  const fnChangePage = (e: React.MouseEvent<HTMLAnchorElement>, $num: number) => {
-    e.preventDefault()
+  const fnChangePage = ($num: number, e?: React.MouseEvent<HTMLAnchorElement>) => {
+    if (e) e.preventDefault()
 
     setCurrentPageNo($num)
   }
@@ -83,6 +83,38 @@ const Review = (props: ReviewProps) => {
   const fnSetReview = ($data: ReviewItem) => {
     toggleReviewModal()
     setCurrentReview($data)
+  }
+
+  // 리뷰 삭제
+  const fnDeleteReview = ($reviewId: string) => {
+    sAlert({
+      html: '리뷰를 삭제 하시겠습니까?',
+      showCancelButton: true,
+    }).then((res: any) => {
+      if (res.isConfirmed) {
+        GetApiPath(apiList.deleteReview, $reviewId).then(res => {
+          if (res !== 'FAIL') {
+            // 삭제 후 리뷰 리스트 조회
+            fnGetReview()
+          }
+        })
+      }
+    })
+  }
+
+  // 리뷰 추가 (currentPageNo에 따른 컨트롤)
+  const fnAddNewReview = () => {
+    if (currentReview.reviewId === '') {
+      // 리뷰 등록 시
+      if (currentPageNo === 1) {
+        fnGetReview()
+      } else {
+        fnChangePage(1)
+      }
+    } else {
+      // 리뷰 수정 시
+      fnGetReview()
+    }
   }
 
   useEffect(() => {
@@ -102,7 +134,12 @@ const Review = (props: ReviewProps) => {
               <ul>
                 {
                   reviewList.map(item => (
-                    <ReviewList item={item} key={item.reviewId}/>
+                    <ReviewList
+                      key={item.reviewId}
+                      item={item}
+                      fnSetReview={fnSetReview}
+                      fnDeleteReview={fnDeleteReview}
+                    />
                   ))
                 }
               </ul>
@@ -132,6 +169,7 @@ const Review = (props: ReviewProps) => {
           ? <ModalReviewAdd
             currentReview={currentReview}
             toggleReviewModal={toggleReviewModal}
+            fnAddNewReview={fnAddNewReview}
           />
           : <></>
       }
