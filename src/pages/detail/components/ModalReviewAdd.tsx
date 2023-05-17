@@ -1,8 +1,9 @@
+import React, {useEffect, useState} from "react"
+import {useRouter} from "next/router"
 import {ReviewItem} from "utils/interface"
 import detail from "pages/detail/Detail.module.scss"
 import {faXmark} from "@fortawesome/free-solid-svg-icons"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import React, {useEffect, useState} from "react"
 import {Data, GetApi, sAlert} from "services/common"
 import apiList from "utils/apiList"
 
@@ -13,20 +14,20 @@ interface ReviewAddProps {
 
 const reviewItemInit: ReviewItem = {
   reviewId: "",
-  movieId: 0,
+  movieId: "",
   content: ""
 }
 
 const ModalReviewAdd = (props: ReviewAddProps) => {
+  const router = useRouter()
+  const movieId = router.query.movieId as string
   const [currentReview, setCurrentReview] = useState<ReviewItem>(reviewItemInit)
   const [checkContent, setCheckContent] = useState<boolean>(false)
 
   // 리뷰 둥록/수정 onChange 시 데이터 세팅
-  const fnOnchangeReview = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
+  const fnOnchangeReview = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     // validation : content의 경우 빈칸 불가능
-    if (e.target.name === 'content') {
-      setCheckContent(e.target.value.trim() !== "")
-    }
+    setCheckContent(e.target.value.trim() !== "")
 
     setCurrentReview({
       ...currentReview,
@@ -34,7 +35,7 @@ const ModalReviewAdd = (props: ReviewAddProps) => {
     })
   }
 
-  // 리뷰 등록
+  // 리뷰 등록/수정
   const fnAddReview = () => {
     sAlert({
       html: '리뷰를 등록 하시겠습니까?',
@@ -42,8 +43,16 @@ const ModalReviewAdd = (props: ReviewAddProps) => {
     }).then((res: any) => {
       if (res.isConfirmed) {
         const $api = props.currentReview.reviewId === '' ? apiList.postReview : apiList.putReview
+        const $param = props.currentReview.reviewId === '' ?
+          {
+            content: currentReview.content,
+            movieId: currentReview.movieId
+          } : {
+            content: currentReview.content,
+            reviewId: currentReview.reviewId
+          }
 
-        GetApi($api, currentReview).then(res => {
+        GetApi($api, $param).then(res => {
           if (res !== 'FAIL') {
             sAlert({
               icon: 'success',
@@ -68,6 +77,15 @@ const ModalReviewAdd = (props: ReviewAddProps) => {
     setCurrentReview(props.currentReview)
   },[props.currentReview])
 
+  useEffect(() => {
+    if (movieId !== "") {
+      setCurrentReview({
+        ...currentReview,
+        movieId
+      })
+    }
+  },[movieId])
+
   return (
     <div className={detail.reviewAddModal}>
       <div className={detail.addBox}>
@@ -82,7 +100,6 @@ const ModalReviewAdd = (props: ReviewAddProps) => {
             type="text"
             disabled
             maxLength={5}
-            placeholder="이름을 입력해주세요."
             defaultValue={Data.get('userInfo').kakao_account.profile.nickname}
           />
           <textarea

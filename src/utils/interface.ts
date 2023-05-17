@@ -51,7 +51,9 @@ export interface MovieDetailItems {
 
 export interface ReviewItem {
   reviewId?: string;
-  movieId?: number;
+  movieId?: string;
+  kakaoId?: string;
+  userNickname?: string;
   content: string;
 }
 

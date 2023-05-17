@@ -14,7 +14,7 @@ const ReviewList = (props: ReviewListProps) => {
         <FontAwesomeIcon icon={faComments} />
       </div>
       <div className={detail.textBox}>
-        <p>{props.item.userId}</p>
+        <p>{props.item.userNickname}</p>
         <p>{props.item.content}</p>
       </div>
     </li>

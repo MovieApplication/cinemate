@@ -14,7 +14,7 @@ interface ReviewProps {
 
 const reviewItemInit: ReviewItem = {
   reviewId: "",
-  movieId: 0,
+  movieId: "",
   content: ""
 }
 
