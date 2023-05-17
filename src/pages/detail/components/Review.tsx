@@ -12,10 +12,10 @@ interface ReviewProps {
   movieId: string;
 }
 
-const ReviewItemInit: ReviewItem = {
-  review_id: "",
-  content: "",
-  userId: ""
+const reviewItemInit: ReviewItem = {
+  reviewId: "",
+  movieId: 0,
+  content: ""
 }
 
 const paginationInfoInit: PaginationInfo = {
@@ -36,14 +36,14 @@ const Review = (props: ReviewProps) => {
   const [paginationInfo, setPaginationInfo] = useState<PaginationInfo>(paginationInfoInit)
   const [currentPageNo, setCurrentPageNo] = useState<number>(1)
   // 현재 리뷰 데이터
-  const [currentReview, setCurrentReview] = useState<ReviewItem>(ReviewItemInit)
+  const [currentReview, setCurrentReview] = useState<ReviewItem>(reviewItemInit)
 
   const router = useRouter()
 
   // 리뷰 등록/수정 모달창 컨트롤
   const [reviewModalFlag, setReviewModalFlag] = useState<boolean>(false)
   const toggleReviewModal = () => {
-    if (Data.get('login') === null) {
+    if (Data.get('login') === null || Data.get('userInfo') === null) {
       sAlert({
         html: '로그인 후 이용 가능 합니다.<br>로그인 페이지로 이동 하시겠습니까?',
         showCancelButton: true
@@ -94,7 +94,7 @@ const Review = (props: ReviewProps) => {
       <div className={detail.review}>
         <div className={detail.title}>
           <p>해당 영화 리뷰</p>
-          <button type='button' onClick={() => fnSetReview(ReviewItemInit)}>리뷰 쓰기</button>
+          <button type='button' onClick={() => fnSetReview(reviewItemInit)}>리뷰 쓰기</button>
         </div>
         {
           reviewList.length > 0
@@ -102,7 +102,7 @@ const Review = (props: ReviewProps) => {
               <ul>
                 {
                   reviewList.map(item => (
-                    <ReviewList item={item} key={item.review_id}/>
+                    <ReviewList item={item} key={item.reviewId}/>
                   ))
                 }
               </ul>
@@ -120,7 +120,7 @@ const Review = (props: ReviewProps) => {
                 }
               </div>
             </>
-            : <p className={detail.nonReview}>아직 등록된 리뷰가 없습니다. <br/>
+            : <p className={detail.nonReview}>아직 등록된 리뷰가 없습니다.<br/>
               첫 번째 리뷰를 남겨주세요!
             </p>
         }

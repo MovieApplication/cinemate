@@ -50,8 +50,8 @@ export interface MovieDetailItems {
 }
 
 export interface ReviewItem {
-  review_id: string;
-  userId: string;
+  reviewId?: string;
+  movieId?: number;
   content: string;
 }
 

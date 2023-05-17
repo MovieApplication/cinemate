@@ -13,7 +13,7 @@ import dynamic from "next/dynamic"
 const MovieList = dynamic(() => import('components/MovieList'))
 const Review = dynamic(() => import('pages/detail/components/Review'))
 
-const MovieResultInit: MovieResult = {
+const movieResultInit: MovieResult = {
   page: 1,
   results: [],
   total_pages: 0,
@@ -24,7 +24,7 @@ const MovieDetail = () => {
   const router = useRouter()
   const movieId = router.query.movieId as string
   const [detailData, setDetailData] = useState<MovieDetailItems>()
-  const [similarData, setSimilarData] = useState<MovieResult>(MovieResultInit)
+  const [similarData, setSimilarData] = useState<MovieResult>(movieResultInit)
 
   const movieListArr = {
     title: '비슷한 영화',
@@ -91,7 +91,7 @@ const MovieDetail = () => {
             <li>
               <p>{detailData.release_date} | {detailData.runtime}분</p>
               <div>
-                <p>{detailData.vote_average.toFixed(1)}</p>
+                <p>{detailData.vote_average?.toFixed(1)}</p>
                 <FontAwesomeIcon icon={faStar}/>
               </div>
             </li>

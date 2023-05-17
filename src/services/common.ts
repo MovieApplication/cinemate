@@ -2,6 +2,10 @@ import { Api } from "utils/apiList"
 import axios from "axios"
 import Swal from 'sweetalert2'
 
+const authHeader = () => {
+  return { 'Authorization': 'Bearer ' + Data.get('login').accessToken }
+}
+
 export const GetApi = async ($api: Api, $param?: object) => {
   let option: object = {
     withCredentials: true
@@ -11,6 +15,10 @@ export const GetApi = async ($api: Api, $param?: object) => {
     option = { ...option, ...$api, params: $param !== undefined ? $param : {} }
   } else {
     option = { ...option, ...$api, data: $param !== undefined ? $param : {} }
+  }
+
+  if ($api.public) {
+    option.headers = authHeader()
   }
 
   return await axios(option)

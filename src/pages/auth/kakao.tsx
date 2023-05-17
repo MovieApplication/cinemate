@@ -55,6 +55,7 @@ const Kakao = () => {
       url: "https://kapi.kakao.com/v2/user/me",
     }).then(res => {
       try {
+        Data.set('userInfo', res.data)
         fnUserInfoCheck(res.data.id.toString(), res.data.kakao_account.profile.nickname)
       } catch (e) {
         console.log('e : ', e)
@@ -95,7 +96,7 @@ const Kakao = () => {
           icon: 'success',
           html: 'CINEMATE 회원가입이<br>성공적으로 완료 되었습니다.',
           didClose: () => {
-            router.push('/')
+            router.back()
           }
         })
       }

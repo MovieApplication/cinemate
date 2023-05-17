@@ -13,7 +13,7 @@ import {faCircleInfo} from "@fortawesome/free-solid-svg-icons"
 // 해당 컴포넌트가 필요한 시점에만 로드
 const MovieList = dynamic(() => import('components/MovieList'))
 
-const MovieResultInit: MovieResult = {
+const movieResultInit: MovieResult = {
   page: 1,
   results: [],
   total_pages: 0,
@@ -21,11 +21,11 @@ const MovieResultInit: MovieResult = {
 }
 
 const Home: NextPage = () => {
-  const [popularList, setPopularList] = useState<MovieResult>(MovieResultInit)
-  const [inTheaterList, setInTheaterList] = useState<MovieResult>(MovieResultInit)
-  const [releaseList, setReleaseList] = useState<MovieResult>(MovieResultInit)
-  const [voteList, setVoteList] = useState<MovieResult>(MovieResultInit)
-  const [yearList, setYearList] = useState<MovieResult>(MovieResultInit)
+  const [popularList, setPopularList] = useState<MovieResult>(movieResultInit)
+  const [inTheaterList, setInTheaterList] = useState<MovieResult>(movieResultInit)
+  const [releaseList, setReleaseList] = useState<MovieResult>(movieResultInit)
+  const [voteList, setVoteList] = useState<MovieResult>(movieResultInit)
+  const [yearList, setYearList] = useState<MovieResult>(movieResultInit)
 
   const movieListArr = [{
     title: '현재 상영 중인 영화',

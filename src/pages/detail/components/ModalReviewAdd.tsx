@@ -3,31 +3,26 @@ import detail from "pages/detail/Detail.module.scss"
 import {faXmark} from "@fortawesome/free-solid-svg-icons"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import React, {useEffect, useState} from "react"
-import {hangulRegExp} from "utils/validation"
+import {Data, GetApi, sAlert} from "services/common"
+import apiList from "utils/apiList"
 
 interface ReviewAddProps {
   currentReview: ReviewItem;
   toggleReviewModal(): void;
 }
 
-const ReviewItemInit: ReviewItem = {
-  review_id: "",
-  content: "",
-  userId: ""
+const reviewItemInit: ReviewItem = {
+  reviewId: "",
+  movieId: 0,
+  content: ""
 }
 
 const ModalReviewAdd = (props: ReviewAddProps) => {
-  const [currentReview, setCurrentReview] = useState<ReviewItem>(ReviewItemInit)
-  const [checkUserId, setCheckUserId] = useState<boolean>(false)
+  const [currentReview, setCurrentReview] = useState<ReviewItem>(reviewItemInit)
   const [checkContent, setCheckContent] = useState<boolean>(false)
 
   // 리뷰 둥록/수정 onChange 시 데이터 세팅
   const fnOnchangeReview = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
-    // validation : userId의 경우 한글만 입력 가능
-    if (e.target.name === 'userId') {
-      setCheckUserId(hangulRegExp(e.target.value) && e.target.value !== "")
-    }
-
     // validation : content의 경우 빈칸 불가능
     if (e.target.name === 'content') {
       setCheckContent(e.target.value.trim() !== "")
@@ -36,6 +31,27 @@ const ModalReviewAdd = (props: ReviewAddProps) => {
     setCurrentReview({
       ...currentReview,
       [e.target.name]: e.target.value
+    })
+  }
+
+  // 리뷰 등록
+  const fnAddReview = () => {
+    sAlert({
+      html: '리뷰를 등록 하시겠습니까?',
+      showCancelButton: true,
+    }).then((res: any) => {
+      if (res.isConfirmed) {
+        const $api = props.currentReview.reviewId === '' ? apiList.postReview : apiList.putReview
+
+        GetApi($api, currentReview).then(res => {
+          if (res !== 'FAIL') {
+            sAlert({
+              icon: 'success',
+              html: '리뷰가 등록 되었습니다.'
+            })
+          }
+        })
+      }
     })
   }
 
@@ -64,17 +80,11 @@ const ModalReviewAdd = (props: ReviewAddProps) => {
         <div className={detail.addText}>
           <input
             type="text"
-            placeholder="이름을 입력해주세요."
+            disabled
             maxLength={5}
-            name="userId"
-            value={currentReview.userId}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => fnOnchangeReview(e)}
+            placeholder="이름을 입력해주세요."
+            defaultValue={Data.get('userInfo').kakao_account.profile.nickname}
           />
-          {
-            !checkUserId
-              ? <p>이름을 확인해주세요.</p>
-              : <></>
-          }
           <textarea
             placeholder="영화에 대한 솔직한 리뷰를 남겨주세요."
             maxLength={100}
@@ -88,7 +98,13 @@ const ModalReviewAdd = (props: ReviewAddProps) => {
               : <></>
           }
         </div>
-        <button type='button' disabled={!(checkUserId && checkContent)}>등록</button>
+        <button
+          type='button'
+          disabled={!checkContent}
+          onClick={fnAddReview}
+        >
+          등록
+        </button>
       </div>
     </div>
   )
