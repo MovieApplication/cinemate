@@ -71,7 +71,7 @@ const MovieDetail = () => {
     if (similarData.page !== 1) fnGetSimilarMovie()
   },[similarData.page])
 
-  return detailData !== undefined ? (
+  return detailData !== undefined && movieId !== '' ? (
     <div className={detail.wrapper}>
       <div className={detail.container}>
         {/* 영화 포스터 이미지 */}

@@ -81,8 +81,8 @@ const Review = (props: ReviewProps) => {
 
   // 리뷰 신규/수정 모달창 컨트롤
   const fnSetReview = ($data: ReviewItem) => {
-    toggleReviewModal()
     setCurrentReview($data)
+    toggleReviewModal()
   }
 
   // 리뷰 삭제
@@ -115,6 +115,8 @@ const Review = (props: ReviewProps) => {
       // 리뷰 수정 시
       fnGetReview()
     }
+
+    toggleReviewModal()
   }
 
   useEffect(() => {

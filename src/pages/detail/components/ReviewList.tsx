@@ -1,7 +1,8 @@
 import {ReviewItem} from "utils/interface"
 import detail from "../Detail.module.scss"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faComments, faPencil, faTrashCan} from "@fortawesome/free-solid-svg-icons"
+import {faPencil, faTrashCan} from "@fortawesome/free-solid-svg-icons"
+import {faComments} from "@fortawesome/free-regular-svg-icons"
 
 interface ReviewListProps {
   item: ReviewItem;
@@ -12,14 +13,16 @@ interface ReviewListProps {
 const ReviewList = (props: ReviewListProps) => {
   return props.item ? (
     <li>
-      <div className={detail.iconBox}>
-        <FontAwesomeIcon icon={faComments} />
+      <div className={detail.iconTextBox}>
+        <div className={detail.iconBox}>
+          <FontAwesomeIcon icon={faComments}/>
+        </div>
+        <div className={detail.textBox}>
+          <p>{props.item.userNickname}</p>
+          <p>{props.item.content}</p>
+        </div>
       </div>
-      <div className={detail.textBox}>
-        <p>{props.item.userNickname}</p>
-        <p>{props.item.content}</p>
-      </div>
-      <div>
+      <div className={detail.buttonBox}>
         {/* 수정 버튼 */}
         <button
           type='button'

@@ -55,6 +55,10 @@ export const GetApiPath = async ($api: Api, $param?: string | number, $page?: ob
     option = { ...option, ...$api, data: $page !== undefined ? $page : {} }
   }
 
+  if ($api.public) {
+    option.headers = authHeader()
+  }
+
   return await axios(option)
     .then((res) => {
       try {

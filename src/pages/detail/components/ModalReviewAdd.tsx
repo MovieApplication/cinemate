@@ -32,7 +32,7 @@ const ModalReviewAdd = (props: ReviewAddProps) => {
 
     setCurrentReview({
       ...currentReview,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value.trim()
     })
   }
 
@@ -47,7 +47,7 @@ const ModalReviewAdd = (props: ReviewAddProps) => {
         const $param = props.currentReview.reviewId === '' ?
           {
             content: currentReview.content,
-            movieId: currentReview.movieId
+            movieId: movieId
           } : {
             content: currentReview.content,
             reviewId: currentReview.reviewId
@@ -74,15 +74,6 @@ const ModalReviewAdd = (props: ReviewAddProps) => {
   useEffect(() => {
     setCurrentReview(props.currentReview)
   },[props.currentReview])
-
-  useEffect(() => {
-    if (movieId !== "") {
-      setCurrentReview({
-        ...currentReview,
-        movieId
-      })
-    }
-  },[movieId])
 
   return (
     <div className={detail.reviewAddModal}>

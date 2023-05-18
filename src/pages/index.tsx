@@ -169,9 +169,9 @@ const Home: NextPage = () => {
 
       {/* Movie List */}
       {
-        movieListArr.map(data => (
+        movieListArr.map((data, idx) => (
           data.item.length > 0
-            ? <div className={`${home.list} ${data.title === '실시간 인기 순위 영화' ? home.popular : ''}`} key={data.title}>
+            ? <div className={`${home.list} ${data.title === '실시간 인기 순위 영화' ? home.popular : ''}`} key={idx}>
               <p>{data.title}</p>
               <MovieList
                 detailList={false}
@@ -183,7 +183,7 @@ const Home: NextPage = () => {
                 height={270}
               />
             </div>
-            : <></>
+            : null
         ))
       }
     </>
