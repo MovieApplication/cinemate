@@ -5,7 +5,7 @@ export interface Api {
   url: string;
   desc: string;
   headers?: object;
-  public?: boolean;
+  private?: boolean;
 }
 
 interface ApiList {
@@ -72,21 +72,21 @@ const apiList: ApiList = {
     method: 'POST',
     url: `${domain}/api/v1/review`,
     desc: '리뷰 등록',
-    public: true
+    private: true
   },
   // 리뷰 수정
   'putReview': {
     method: 'PUT',
     url: `${domain}/api/v1/review`,
     desc: '리뷰 수정',
-    public: true
+    private: true
   },
   // 리뷰 삭제
   'deleteReview': {
     method: 'DELETE',
     url: `${domain}/api/v1/review/`,
     desc: '리뷰 삭제',
-    public: true
+    private: true
   },
   /*
   로그인
@@ -108,6 +108,12 @@ const apiList: ApiList = {
     method: 'POST',
     url: `${domain}/api/v1/user/login/`,
     desc: '로그인 (토큰 획득)'
+  },
+  // 토큰 재발급
+  'getRefreshToken': {
+    method: 'POST',
+    url: `${domain}/api/v1/user/refresh-token`,
+    desc: '토큰 재발급'
   },
 }
 

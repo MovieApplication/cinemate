@@ -1,9 +1,36 @@
-import { Api } from "utils/apiList"
+import apiList, { Api } from "utils/apiList"
 import axios from "axios"
 import Swal from 'sweetalert2'
+import moment from "moment"
+import 'moment/locale/ko'
 
 const authHeader = () => {
   return { 'Authorization': 'Bearer ' + Data.get('login').accessToken }
+}
+
+// 토큰 재발급
+export const getAuthenticate = async () => {
+  await GetApi(apiList.getRefreshToken, {
+    refreshTokenId: Data.get('login').refreshTokenId
+  }).then(($res: object | string) => {
+    if($res !== 'FAIL') {
+      Data.set('login', $res)
+    }
+  }, () => {
+    fnLogOut()
+  })
+}
+
+const fnAuthCheck = async () => {
+  if(!tokenExpireCheck()) {
+    await getAuthenticate()
+  }
+}
+
+export const fnLogOut = () => {
+  Data.remove('login')
+
+  window.location.href = '/'
 }
 
 export const GetApi = async ($api: Api, $param?: object) => {
@@ -17,7 +44,8 @@ export const GetApi = async ($api: Api, $param?: object) => {
     option = { ...option, ...$api, data: $param !== undefined ? $param : {} }
   }
 
-  if ($api.public) {
+  if ($api.private) {
+    await fnAuthCheck()
     option.headers = authHeader()
   }
 
@@ -55,7 +83,8 @@ export const GetApiPath = async ($api: Api, $param?: string | number, $page?: ob
     option = { ...option, ...$api, data: $page !== undefined ? $page : {} }
   }
 
-  if ($api.public) {
+  if ($api.private) {
+    await fnAuthCheck()
     option.headers = authHeader()
   }
 
@@ -121,4 +150,39 @@ export const sAlert = ($opt: object | undefined) => {
       }
     })
   })
+}
+
+export const parseJwt = (token: string) => {
+  const base64Url = token.split('.')[1]
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+  const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function (c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+  }).join(''))
+
+  return JSON.parse(jsonPayload)
+}
+
+export const tokenExpireCheck = () => {
+  const $t = Data.get('login')
+  let $tData
+
+  if ($t !== 'undefined' && $t !== null && typeof $t !== 'string') {
+    const now = moment().format('X')
+
+    $tData = parseJwt($t.accessToken)
+
+    return now < $tData.exp
+  } else {
+    return false
+  }
+}
+
+export const getLoginId = () => {
+  const $t = Data.get('login')
+
+  if ($t !== 'undefined' && $t !== null) {
+    const $tData = parseJwt($t.accessToken)
+
+    return $tData.sub
+  }
 }

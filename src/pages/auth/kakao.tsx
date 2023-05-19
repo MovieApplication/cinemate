@@ -96,7 +96,7 @@ const Kakao = () => {
           icon: 'success',
           html: 'CINEMATE 회원가입이<br>성공적으로 완료 되었습니다.',
           didClose: () => {
-            router.back()
+            router.replace('/')
           }
         })
       }
