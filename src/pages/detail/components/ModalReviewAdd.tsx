@@ -56,6 +56,10 @@ const ModalReviewAdd = (props: ReviewAddProps) => {
         GetApi($api, $param).then(res => {
           if (res !== 'FAIL') {
             props.fnAddNewReview()
+          } else {
+            sAlert({
+              html: '동일한 내용의 리뷰는 작성하실 수 없습니다.'
+            })
           }
         })
       }
