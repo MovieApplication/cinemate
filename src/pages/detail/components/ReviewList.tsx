@@ -3,6 +3,7 @@ import detail from "../Detail.module.scss"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faPencil, faTrashCan} from "@fortawesome/free-solid-svg-icons"
 import {faComments} from "@fortawesome/free-regular-svg-icons"
+import {Data, getLoginId} from "services/common"
 
 interface ReviewListProps {
   item: ReviewItem;
@@ -22,22 +23,26 @@ const ReviewList = (props: ReviewListProps) => {
           <p>{props.item.content}</p>
         </div>
       </div>
-      <div className={detail.buttonBox}>
-        {/* 수정 버튼 */}
-        <button
-          type='button'
-          onClick={() => props.fnSetReview(props.item)}
-        >
-          <FontAwesomeIcon icon={faPencil}/>
-        </button>
-        {/* 삭제 버튼 */}
-        <button
-          type='button'
-          onClick={() => props.fnDeleteReview(props.item.reviewId as string)}
-        >
-          <FontAwesomeIcon icon={faTrashCan}/>
-        </button>
-      </div>
+      {
+        getLoginId() === Data.get('userInfo').id
+        ? <div className={detail.buttonBox}>
+          {/* 수정 버튼 */}
+          <button
+            type='button'
+            onClick={() => props.fnSetReview(props.item)}
+          >
+            <FontAwesomeIcon icon={faPencil}/>
+          </button>
+          {/* 삭제 버튼 */}
+          <button
+            type='button'
+            onClick={() => props.fnDeleteReview(props.item.reviewId as string)}
+          >
+            <FontAwesomeIcon icon={faTrashCan}/>
+          </button>
+        </div>
+        : null
+      }
     </li>
   ) : <>err</>
 }
