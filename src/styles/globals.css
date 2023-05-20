@@ -86,7 +86,9 @@ button {
 }
 
 .swiper-button-prev svg, .swiper-button-next svg {
-  background-color: rgba(0,0,0,0.4);
+  width: 1.5rem;
+  height: 2.3rem;
+  background-color: rgba(0,0,0,0.5);
   cursor: pointer;
 }
 

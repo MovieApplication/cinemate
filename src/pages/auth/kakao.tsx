@@ -10,12 +10,12 @@ import apiList from "utils/apiList"
 const Kakao = () => {
   const [kakaoAccessToken, setKakaoAccessToken] = useState<string>('')
   const searchParams = useSearchParams()
-  const code = searchParams.get('code')
+  const code = searchParams.get('code') as string
   const router = useRouter()
 
   // 카카오 로그인 : 토큰 발급
   const fnGetKakaoOauthToken = async () => {
-    const makeFormData = params => {
+    const makeFormData = (params: {[key: string]: string}) => {
       const searchParams = new URLSearchParams()
       Object.keys(params).forEach(key => {
         searchParams.append(key, params[key])
@@ -38,6 +38,7 @@ const Kakao = () => {
       })
     }).then(res => {
       try {
+        Data.set('kakaoLogin', res.data)
         setKakaoAccessToken(res.data.access_token)
       } catch (e) {
         console.log('e : ', e)

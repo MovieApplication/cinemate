@@ -1,29 +1,22 @@
 import {useEffect, useState} from "react"
+import { useRouter } from 'next/router'
 import Image from "next/image"
 import Link from "next/link"
 import header from './Header.module.scss'
-import {KAKAO_AUTH_URL, KAKAO_LOGOUT_URL} from "services/common"
+import {Data, KAKAO_AUTH_URL, KAKAO_LOGOUT_URL} from "services/common"
 import KakaoLogo from "../../../public/images/kakao_login_small.png"
-import axios from "axios"
 
 export default function Header() {
   const [scrollValue, setScrollValue] = useState(0)
+  const [kakaoLoginShow, setKakaoLoginShow] = useState(true)
+  const router = useRouter()
 
   const updateScroll = () => setScrollValue(window.scrollY || document.documentElement.scrollTop)
 
-  // 카카오 로그아웃
-  const fnGetKakaoLogout = async () => {
-    await axios({
-      method: 'GET',
-      url: KAKAO_LOGOUT_URL,
-    }).then(() => {
-      try {
-        alert('로그아웃')
-      } catch (e) {
-        console.log('e : ', e)
-      }
-    })
-  }
+  // router 변경마다 로그인 여부 체크해 아이콘 변경
+  useEffect(() => {
+    setKakaoLoginShow(Data.get('kakaoLogin') === null)
+  },[router])
 
   useEffect(() => {
     // scroll event
@@ -41,13 +34,17 @@ export default function Header() {
         />
       </Link>
 
-      <Link href={KAKAO_AUTH_URL}>
-        <Image src={KakaoLogo} alt="카카오 로그인"/>
-      </Link>
-
-      <button type='button' onClick={fnGetKakaoLogout}>
-        로그아웃
-      </button>
+      {
+        router.pathname !== '/auth/kakao' && router.pathname !== '/auth/logout' && (
+          kakaoLoginShow
+          ? <Link href={KAKAO_AUTH_URL}>
+            <Image src={KakaoLogo} alt="카카오 로그인"/>
+          </Link>
+          : <Link href={KAKAO_LOGOUT_URL}>
+            <button type='button' className={header.logout}>로그아웃</button>
+          </Link>
+        )
+      }
     </header>
   )
 }
