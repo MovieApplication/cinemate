@@ -79,7 +79,7 @@ const ModalReviewAdd = (props: ReviewAddProps) => {
     setCurrentReview(props.currentReview)
   },[props.currentReview])
 
-  return (
+  return props.currentReview ? (
     <div className={detail.reviewAddModal}>
       <div className={detail.addBox}>
         <h2>리뷰 쓰기</h2>
@@ -117,7 +117,7 @@ const ModalReviewAdd = (props: ReviewAddProps) => {
         </button>
       </div>
     </div>
-  )
+  ): <></>
 }
 
 export default ModalReviewAdd

@@ -66,7 +66,7 @@ const Review = (props: ReviewProps) => {
 
     GetApiPath(apiList.getReview, props.movieId, pageParams).then(res => {
       if (res !== 'FAIL') {
-        setReviewList(res.items.filter($item => !$item.delYn))
+        setReviewList(res.items.filter(($item: ReviewItem) => !$item.delYn))
         setPaginationInfo(res.paginationInfo)
       }
     })

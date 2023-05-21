@@ -1,5 +1,5 @@
 import apiList, { Api } from "utils/apiList"
-import axios from "axios"
+import axios, {AxiosRequestConfig} from "axios"
 import Swal from 'sweetalert2'
 import moment from "moment"
 import 'moment/locale/ko'
@@ -36,7 +36,7 @@ export const fnLogOut = () => {
 }
 
 export const GetApi = async ($api: Api, $param?: object) => {
-  let option: object = {
+  let option: AxiosRequestConfig = {
     withCredentials: true
   }
 
@@ -68,7 +68,7 @@ export const GetApi = async ($api: Api, $param?: object) => {
 }
 
 export const GetApiPath = async ($api: Api, $param?: string | number, $page?: object) => {
-  let option: object = {
+  let option: AxiosRequestConfig = {
     withCredentials: true
   }
 
