@@ -77,6 +77,7 @@ const ModalReviewAdd = (props: ReviewAddProps) => {
 
   useEffect(() => {
     setCurrentReview(props.currentReview)
+    setCheckContent(props.currentReview.content !== "")
   },[props.currentReview])
 
   return props.currentReview ? (
