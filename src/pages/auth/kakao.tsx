@@ -69,11 +69,11 @@ const Kakao = () => {
     GetApiPath(apiList.userInfoCheck, $kakaoId).then($res => {
       // 기존 유저일 경우 : 로그인
       if ($res === true) {
-        fnUserLogin($kakaoId)
+        fnUserLogin($kakaoId, true)
       } else {
         // 유저가 아닐 경우 : 유저 등록 -> 로그인
         fnAddUserInfo($kakaoId, $nickname).then(() =>
-          fnUserLogin($kakaoId)
+          fnUserLogin($kakaoId, false)
         )
       }
     })
@@ -88,14 +88,14 @@ const Kakao = () => {
   }
 
   // 로그인 (토큰 획득)
-  const fnUserLogin = async ($nickname: string) => {
+  const fnUserLogin = async ($nickname: string, $existing: boolean) => {
     await GetApiPath(apiList.userLogin, $nickname).then(res => {
       if (res !== 'FAIL') {
         Data.set('login', res)
 
         sAlert({
           icon: 'success',
-          html: 'CINEMATE 회원가입이<br>성공적으로 완료 되었습니다.',
+          html: `CINEMATE ${$existing ? '회원가입' : '로그인'}이<br>성공적으로 완료 되었습니다.`,
           didClose: () => {
             router.replace('/')
           }
