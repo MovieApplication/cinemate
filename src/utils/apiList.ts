@@ -1,4 +1,5 @@
 const domain = 'http://15.165.236.184:8080'
+//const domain = 'http://localhost:8080'
 
 export interface Api {
   method: string;
@@ -113,7 +114,8 @@ const apiList: ApiList = {
   'getRefreshToken': {
     method: 'POST',
     url: `${domain}/api/v1/user/refresh-token`,
-    desc: '토큰 재발급'
+    desc: '토큰 재발급',
+    private: true
   },
 }
 
