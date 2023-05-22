@@ -95,7 +95,7 @@ const Kakao = () => {
 
         sAlert({
           icon: 'success',
-          html: `CINEMATE ${$existing ? '회원가입' : '로그인'}이<br>성공적으로 완료 되었습니다.`,
+          html: `CINEMATE ${$existing ? '로그인' : '회원가입'}이<br>성공적으로 완료 되었습니다.`,
           didClose: () => {
             router.replace('/')
           }
