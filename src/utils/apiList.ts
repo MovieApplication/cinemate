@@ -114,8 +114,7 @@ const apiList: ApiList = {
   'getRefreshToken': {
     method: 'POST',
     url: `${domain}/api/v1/user/refresh-token`,
-    desc: '토큰 재발급',
-    private: true
+    desc: '토큰 재발급'
   },
 }
 
