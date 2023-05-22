@@ -93,7 +93,8 @@ button {
 }
 
 .active {
-  font-weight: 500;
+  color: #fff !important;
+  font-weight: 600;
 }
 
 .spinner {

@@ -3,7 +3,7 @@ import React, {useMemo} from "react"
 interface PagingProps {
   idx: number;
   curPageNo: number;
-  fnChangePage($num: number, event: React.MouseEvent<HTMLAnchorElement>): void;
+  fnChangePage($num: number): void;
 }
 
 const Paging = (props: PagingProps) => {
@@ -12,13 +12,13 @@ const Paging = (props: PagingProps) => {
   },[props.curPageNo])
 
   return (
-    <a
-      href="#"
+    <button
+      type='button'
       className={checkCurrent}
-      onClick={(event) => props.fnChangePage(props.idx, event)}
+      onClick={() => props.fnChangePage(props.idx)}
     >
       {props.idx}
-    </a>
+    </button>
   )
 }
 

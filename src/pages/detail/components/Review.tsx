@@ -73,9 +73,7 @@ const Review = (props: ReviewProps) => {
   }
 
   // 페이징
-  const fnChangePage = ($num: number, e?: React.MouseEvent<HTMLAnchorElement>) => {
-    if (e) e.preventDefault()
-
+  const fnChangePage = ($num: number) => {
     setCurrentPageNo($num)
   }
 
