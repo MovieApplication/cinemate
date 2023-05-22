@@ -119,7 +119,7 @@ const Review = (props: ReviewProps) => {
 
   useEffect(() => {
     fnGetReview()
-  },[currentPageNo])
+  },[currentPageNo, props.movieId])
 
   return (
     <>
