@@ -134,10 +134,6 @@ export const CLIENT_ID = "d406d04caf54515425c2000ab78a1e9e"
 export const REDIRECT_URI = "http://localhost:3006/auth/kakao"
 export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`
 
-// 카카오 로그아웃
-export const LOGOUT_REDIRECT_URI = "http://localhost:3006/auth/logout"
-export const KAKAO_LOGOUT_URL = `https://kauth.kakao.com/oauth/logout?client_id=${CLIENT_ID}&logout_redirect_uri=${LOGOUT_REDIRECT_URI}`
-
 // sweetAlert
 const mixAlert = Swal.mixin({
   position: 'center',
