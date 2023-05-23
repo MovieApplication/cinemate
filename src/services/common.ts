@@ -32,7 +32,12 @@ export const fnLogOut = () => {
     Data.remove(key)
   })
 
-  window.location.href = '/'
+  sAlert({
+    html: '로그인 대기 유효 시간이 만료 되었습니다.<br>다시 로그인 시도해 주시기 바랍니다.',
+    didClose: () => {
+      window.location.href = KAKAO_AUTH_URL
+    }
+  })
 }
 
 export const GetApi = async ($api: Api, $param?: object) => {
