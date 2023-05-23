@@ -15,9 +15,9 @@ export const getAuthenticate = async () => {
   }).then(($res: object | string) => {
     if($res !== 'FAIL') {
       Data.set('login', $res)
+    } else {
+      fnLogOut()
     }
-  }, () => {
-    fnLogOut()
   })
 }
 
