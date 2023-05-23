@@ -72,9 +72,7 @@ const Kakao = () => {
         fnUserLogin($kakaoId, true)
       } else {
         // 유저가 아닐 경우 : 유저 등록 -> 로그인
-        fnAddUserInfo($kakaoId, $nickname).then(() =>
-          fnUserLogin($kakaoId, false)
-        )
+        fnAddUserInfo($kakaoId, $nickname)
       }
     })
   }
@@ -84,6 +82,10 @@ const Kakao = () => {
     await GetApi(apiList.userInfo, {
       kakaoId: $kakaoId,
       userNickname: $nickname
+    }).then(res => {
+      if (res !== 'FAIL') {
+        fnUserLogin($kakaoId, false)
+      }
     })
   }
 
