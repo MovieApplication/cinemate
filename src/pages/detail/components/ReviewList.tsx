@@ -27,7 +27,7 @@ const ReviewList = (props: ReviewListProps) => {
         </div>
       </div>
       {
-        Number(getLoginId()) === Data.get('userInfo').id
+        Number(getLoginId()) === Data.get('userInfo')?.id
         ? <div className={detail.buttonBox}>
           {/* 수정 버튼 */}
           <button

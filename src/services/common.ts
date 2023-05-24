@@ -15,16 +15,24 @@ export const getAuthenticate = async () => {
   }).then(($res: object | string) => {
     if($res !== 'FAIL') {
       Data.set('login', $res)
-    } else {
-      fnLogOut()
     }
   })
 }
 
 const fnAuthCheck = async () => {
   if(!tokenExpireCheck()) {
+    // access-token 만료 시 : 토큰 재발급
     await getAuthenticate()
   }
+  /*else {
+    // refresh-token 만료 시 : 로그아웃
+    sAlert({
+      html: '로그인 대기 유효 시간이 만료 되었습니다.<br>다시 로그인 시도해 주시기 바랍니다.',
+      didClose: () => {
+        kakaoLogout()
+      }
+    })
+  }*/
 }
 
 export const fnLogOut = () => {
@@ -34,8 +42,27 @@ export const fnLogOut = () => {
       ['kakaoLogin', 'login', 'userInfo'].forEach((key: string) => {
         Data.remove(key)
       })
-      window.location.href = KAKAO_AUTH_URL
+      window.location.href = '/'
     }
+  })
+}
+
+export const kakaoLogout = () => {
+  axios({
+    method: 'POST',
+    url: 'https://kapi.kakao.com/v1/user/logout',
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Authorization": `Bearer ${Data.get('kakaoLogin').access_token}`
+    },
+  }).then(() => {
+    ['kakaoLogin', 'login', 'userInfo'].forEach((key: string) => {
+      Data.remove(key)
+    })
+
+    window.location.href = '/'
+  }).catch((e) => {
+    console.log('e : ' , e)
   })
 }
 

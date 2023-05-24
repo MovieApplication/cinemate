@@ -1,10 +1,9 @@
 import {useEffect, useState} from "react"
 import { useRouter } from 'next/router'
-import axios from "axios"
 import Image from "next/image"
 import Link from "next/link"
 import header from './Header.module.scss'
-import {Data, KAKAO_AUTH_URL, sAlert} from "services/common"
+import {Data, KAKAO_AUTH_URL, kakaoLogout, sAlert} from "services/common"
 import KakaoLogo from "../../../public/images/kakao_login_small.png"
 
 export default function Header() {
@@ -21,30 +20,7 @@ export default function Header() {
       showCancelButton: true,
     }).then((res: any) => {
       if (res.isConfirmed) {
-        axios({
-          method: 'POST',
-          url: 'https://kapi.kakao.com/v1/user/logout',
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Authorization": `Bearer ${Data.get('kakaoLogin').access_token}`
-          },
-        }).then(() => {
-          try {
-            sAlert({
-              icon: 'success',
-              html: '로그아웃이 완료 되었습니다.',
-              didClose: () => {
-                ['kakaoLogin', 'login', 'userInfo'].forEach((key: string) => {
-                  Data.remove(key)
-                })
-
-                router.replace('/')
-              }
-            })
-          } catch (e) {
-            console.log('e : ', e)
-          }
-        })
+        kakaoLogout()
       }
     })
   }
