@@ -14,6 +14,7 @@ export const getAuthenticate = async () => {
     refreshTokenId: Data.get('login').refreshTokenId
   }).then(($res: object | string) => {
     if($res !== 'FAIL') {
+      // access-token 만료 시 : 토큰 재발급
       Data.set('login', $res)
     }
   })
@@ -21,30 +22,8 @@ export const getAuthenticate = async () => {
 
 const fnAuthCheck = async () => {
   if(!tokenExpireCheck()) {
-    // access-token 만료 시 : 토큰 재발급
     await getAuthenticate()
   }
-  /*else {
-    // refresh-token 만료 시 : 로그아웃
-    sAlert({
-      html: '로그인 대기 유효 시간이 만료 되었습니다.<br>다시 로그인 시도해 주시기 바랍니다.',
-      didClose: () => {
-        kakaoLogout()
-      }
-    })
-  }*/
-}
-
-export const fnLogOut = () => {
-  sAlert({
-    html: '로그인 대기 유효 시간이 만료 되었습니다.<br>다시 로그인 시도해 주시기 바랍니다.',
-    didClose: () => {
-      ['kakaoLogin', 'login', 'userInfo'].forEach((key: string) => {
-        Data.remove(key)
-      })
-      window.location.href = '/'
-    }
-  })
 }
 
 export const kakaoLogout = () => {
@@ -93,6 +72,19 @@ export const GetApi = async ($api: Api, $param?: object) => {
       }
     }).catch((err) => {
       console.log('err : ' , err)
+      if (err.response.data.errorCode === 'E020' || err.response.data.errorCode === 'E002') {
+        sAlert({
+          html: '로그인 대기 유효 시간이 만료 되었습니다.<br>다시 로그인 시도해 주시기 바랍니다.',
+          didClose: () => {
+            kakaoLogout()
+          }
+        })
+      } else {
+        sAlert({
+          text: err.response.data.errorMessage ? err.response.data.errorMessage : err.response.data.message,
+          icon: 'error'
+        })
+      }
 
       return 'FAIL'
     })
@@ -132,6 +124,19 @@ export const GetApiPath = async ($api: Api, $param?: string | number, $page?: ob
       }
     }).catch((err) => {
       console.log('err : ' , err)
+      if (err.response.data.errorCode === 'E020' || err.response.data.errorCode === 'E002') {
+        sAlert({
+          html: '로그인 대기 유효 시간이 만료 되었습니다.<br>다시 로그인 시도해 주시기 바랍니다.',
+          didClose: () => {
+            kakaoLogout()
+          }
+        })
+      } else {
+        sAlert({
+          text: err.response.data.errorMessage ? err.response.data.errorMessage : err.response.data.message,
+          icon: 'error'
+        })
+      }
 
       return 'FAIL'
     })

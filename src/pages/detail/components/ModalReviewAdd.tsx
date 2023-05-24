@@ -4,7 +4,7 @@ import {ReviewItem} from "utils/interface"
 import detail from "pages/detail/Detail.module.scss"
 import {faXmark} from "@fortawesome/free-solid-svg-icons"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {Data, GetApi, kakaoLogout, sAlert} from "services/common"
+import {Data, GetApi, sAlert} from "services/common"
 import apiList from "utils/apiList"
 
 interface ReviewAddProps {
@@ -32,7 +32,7 @@ const ModalReviewAdd = (props: ReviewAddProps) => {
 
     setCurrentReview({
       ...currentReview,
-      [e.target.name]: e.target.value.trim()
+      [e.target.name]: e.target.value
     })
   }
 
@@ -56,13 +56,6 @@ const ModalReviewAdd = (props: ReviewAddProps) => {
         GetApi($api, $param).then(res => {
           if (res !== 'FAIL') {
             props.fnAddNewReview()
-          } else {
-            /*sAlert({
-              html: '로그인 대기 유효 시간이 만료 되었습니다.<br>다시 로그인 시도해 주시기 바랍니다.',
-              didClose: () => {
-                kakaoLogout()
-              }
-            })*/
           }
         })
       }
