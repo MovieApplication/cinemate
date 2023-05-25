@@ -3,7 +3,7 @@ import detail from "../Detail.module.scss"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faPencil, faTrashCan} from "@fortawesome/free-solid-svg-icons"
 import {faComments} from "@fortawesome/free-regular-svg-icons"
-import {Data, getLoginId} from "services/common"
+import {getLoginId} from "services/common"
 
 interface ReviewListProps {
   item: ReviewItem;
@@ -27,7 +27,7 @@ const ReviewList = (props: ReviewListProps) => {
         </div>
       </div>
       {
-        Number(getLoginId()) === Data.get('userInfo')?.id
+        getLoginId() === props.item.kakaoId
         ? <div className={detail.buttonBox}>
           {/* 수정 버튼 */}
           <button
