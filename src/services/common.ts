@@ -42,6 +42,14 @@ export const kakaoLogout = () => {
     window.location.href = '/'
   }).catch((e) => {
     console.log('e : ' , e)
+    // 이미 만료된 토큰일 경우
+    if (e.response.data.code === -401) {
+      ['kakaoLogin', 'login', 'userInfo'].forEach((key: string) => {
+        Data.remove(key)
+      })
+
+      window.location.href = '/'
+    }
   })
 }
 
@@ -72,7 +80,7 @@ export const GetApi = async ($api: Api, $param?: object) => {
       }
     }).catch((err) => {
       console.log('err : ' , err)
-      if (err.response.data.errorCode === 'E020' || err.response.data.errorCode === 'E002') {
+      if (err.response.data.errorCode === "INTERNAL_SERVER_ERROR" || err.response.data.errorCode === "EXPIRED_TOKEN") {
         sAlert({
           html: '로그인 대기 유효 시간이 만료 되었습니다.<br>다시 로그인 시도해 주시기 바랍니다.',
           didClose: () => {
@@ -124,7 +132,7 @@ export const GetApiPath = async ($api: Api, $param?: string | number, $page?: ob
       }
     }).catch((err) => {
       console.log('err : ' , err)
-      if (err.response.data.errorCode === 'E020' || err.response.data.errorCode === 'E002') {
+      if (err.response.data.errorCode === "INTERNAL_SERVER_ERROR" || err.response.data.errorCode === "EXPIRED_TOKEN") {
         sAlert({
           html: '로그인 대기 유효 시간이 만료 되었습니다.<br>다시 로그인 시도해 주시기 바랍니다.',
           didClose: () => {
