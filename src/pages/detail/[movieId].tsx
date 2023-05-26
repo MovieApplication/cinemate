@@ -22,7 +22,7 @@ const movieResultInit: MovieResult = {
 
 const MovieDetail = () => {
   const router = useRouter()
-  const movieId = router.query.movieId as string
+  const [movieId, setMovieId] = useState<string>("")
   const [detailData, setDetailData] = useState<MovieDetailItems>()
   const [similarData, setSimilarData] = useState<MovieResult>(movieResultInit)
 
@@ -57,6 +57,13 @@ const MovieDetail = () => {
   const fnChangePage = ($page: number) => {
     setSimilarData({...similarData, page: $page})
   }
+
+  // url query 변경 감지
+  useEffect(() => {
+    if (router.query.movieId) {
+      setMovieId(router.query.movieId as string)
+    }
+  }, [router.query.movieId])
 
   // url query 변경 시: 세부 정보 -> 유사한 영화 목록 조회
   useEffect(() => {
