@@ -8,7 +8,7 @@ export default function Layout({ children }: PropsWithChildren) {
       <Head>
         <title>CINEMATE</title>
         <meta name="description" content="CINEMATE" />
-        <link rel="icon" href="/public/favicon.ico" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <div>

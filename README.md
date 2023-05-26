@@ -1,6 +1,11 @@
 # CINEMATE
 
-> 2023.04.18 ~ <br/> 
+> [팀 프로젝트] 2023.04.18 ~ <br/> 
+>
+> : 영화를 좋아하는 모든 이들을 위한 커뮤니케이션 웹사이트
+> 
+> -  프론트 1명, 백엔드 1명
+> - 역할) 서비스 화면 기획/디자인 및 퍼블리싱, 프론트 구현 
 > 
 > <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white"> <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=Next.Js&logoColor=white"> <img src="https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=Sass&logoColor=white">
 
@@ -26,11 +31,11 @@
 ***
 
 ## _Detail_
-[ SCSS ]
-- 실시간 인기 순위 영화 넘버링 : `data-idx={index + 1}`를 통해 index 값을 넘겨주어 scss 파일 내에서 `attr(data-idx);` 스타일링
-
 [ Next.js ]
 - `CSS Modules` : paint 하는데 필요한 최소한의 CSS만 로드
 - `Dynamic Router` : 'moveId'에 따른 동적 라우팅
 - `next/Image` : 필요한 이미지만 빠르게 로드
 - `next/dynamic` : 페이지 로딩 속도 개선
+
+[ SCSS ]
+- 실시간 인기 순위 영화 넘버링 : `data-idx={index + 1}`를 통해 index 값을 넘겨주어 scss 파일 내에서 `attr(data-idx);` 스타일링
