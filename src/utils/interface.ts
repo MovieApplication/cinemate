@@ -54,7 +54,6 @@ export interface ReviewItem {
   movieId?: string;
   kakaoId?: string;
   userNickname?: string;
-  delYn?: boolean;
   regDatetime?: string;
   content: string;
 }

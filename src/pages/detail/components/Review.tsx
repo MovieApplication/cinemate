@@ -66,7 +66,7 @@ const Review = (props: ReviewProps) => {
 
     GetApiPath(apiList.getReview, props.movieId, pageParams).then(res => {
       if (res !== 'FAIL') {
-        setReviewList(res.items.filter(($item: ReviewItem) => !$item.delYn))
+        setReviewList(res.items)
         setPaginationInfo(res.paginationInfo)
       }
     })
@@ -144,18 +144,7 @@ const Review = (props: ReviewProps) => {
                 }
               </ul>
               {/* 페이징 */}
-              <div className={detail.paging}>
-                {
-                  Array.from({length: paginationInfo.lastPage - paginationInfo.firstPage + 1}, (v, i) => i + paginationInfo.firstPage).map(idx => (
-                    <Paging
-                      key={idx}
-                      idx={idx}
-                      curPageNo={paginationInfo.currentPageNo}
-                      fnChangePage={fnChangePage}
-                    />
-                  ))
-                }
-              </div>
+              <Paging info={paginationInfo} setOption={fnChangePage} />
             </>
             : <p className={detail.nonReview}>아직 등록된 리뷰가 없습니다.<br/>
               첫 번째 리뷰를 남겨주세요!
