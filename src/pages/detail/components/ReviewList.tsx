@@ -7,6 +7,7 @@ import {getLoginId} from "services/common"
 
 interface ReviewListProps {
   item: ReviewItem;
+  currentReview: ReviewItem;
   fnSetReview($data: ReviewItem): void;
   fnDeleteReview($reviewId: string): void;
 }
@@ -21,7 +22,7 @@ const ReviewList = (props: ReviewListProps) => {
         <div className={detail.textBox}>
           <p>
             {props.item.userNickname}
-            <span>{props.item.regDatetime}</span>
+            <span>{props.currentReview.reviewId === "" ? props.item.regDatetime : props.item.modDatetime}</span>
           </p>
           <p>{props.item.content}</p>
         </div>

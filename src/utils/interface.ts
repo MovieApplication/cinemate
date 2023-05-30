@@ -55,6 +55,7 @@ export interface ReviewItem {
   kakaoId?: string;
   userNickname?: string;
   regDatetime?: string;
+  modDatetime?: string;
   content: string;
 }
 

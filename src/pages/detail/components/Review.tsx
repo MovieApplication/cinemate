@@ -137,6 +137,7 @@ const Review = (props: ReviewProps) => {
                     <ReviewList
                       key={item.reviewId}
                       item={item}
+                      currentReview={currentReview}
                       fnSetReview={fnSetReview}
                       fnDeleteReview={fnDeleteReview}
                     />
