@@ -41,7 +41,7 @@ export const kakaoLogout = () => {
 
     window.location.href = '/'
   }).catch((e) => {
-    console.log('e : ' , e)
+    // console.log('e : ' , e)
     // 이미 만료된 토큰일 경우
     if (e.response.data.code === -401) {
       ['kakaoLogin', 'login', 'userInfo'].forEach((key: string) => {
@@ -72,14 +72,14 @@ export const GetApi = async ($api: Api, $param?: object) => {
   return await axios(option)
     .then((res) => {
       try {
-        console.log(`%c [${$api.url}] response : `, 'background-color:red; color: white', res.data)
+        //console.log(`%c [${$api.url}] response : `, 'background-color:red; color: white', res.data)
 
         return res.data
       } catch(e) {
         console.log('e : ', e)
       }
     }).catch((err) => {
-      console.log('err : ' , err)
+      //console.log('err : ' , err)
       if (err.response.data.errorCode === "INTERNAL_SERVER_ERROR" || err.response.data.errorCode === "EXPIRED_TOKEN") {
         sAlert({
           html: '로그인 대기 유효 시간이 만료 되었습니다.<br>다시 로그인 시도해 주시기 바랍니다.',
@@ -124,14 +124,14 @@ export const GetApiPath = async ($api: Api, $param?: string | number, $page?: ob
   return await axios(option)
     .then((res) => {
       try {
-        console.log(`%c [${$api.url}] response : `, 'background-color:red; color: white', res.data)
+        //console.log(`%c [${$api.url}] response : `, 'background-color:red; color: white', res.data)
 
         return res.data
       } catch(e) {
         console.log('e : ', e)
       }
     }).catch((err) => {
-      console.log('err : ' , err)
+      //console.log('err : ' , err)
       if (err.response.data.errorCode === "INTERNAL_SERVER_ERROR" || err.response.data.errorCode === "EXPIRED_TOKEN") {
         sAlert({
           html: '로그인 대기 유효 시간이 만료 되었습니다.<br>다시 로그인 시도해 주시기 바랍니다.',
@@ -175,7 +175,7 @@ export const Data = {
 
 // 카카오 로그인
 export const CLIENT_ID = "d406d04caf54515425c2000ab78a1e9e"
-export const REDIRECT_URI = "http://localhost:3006/auth/kakao"
+export const REDIRECT_URI = "http://15.165.236.184:3000/auth/kakao"
 export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`
 
 // sweetAlert
