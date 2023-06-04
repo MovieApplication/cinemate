@@ -1,13 +1,20 @@
 # CINEMATE
 
-> [팀 프로젝트] 2023.04.18 ~ <br/> 
+> [팀 프로젝트] 2023.04 ~ 2023.05 <br/> 
 >
 > : 영화를 좋아하는 모든 이들을 위한 커뮤니케이션 웹사이트
 > 
 > -  프론트 1명, 백엔드 1명
 > - 역할) 서비스 화면 기획/디자인 및 퍼블리싱, 프론트 구현 
+>
+> 주소 : http://15.165.236.184:3000/
 > 
 > <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white"> <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=Next.Js&logoColor=white"> <img src="https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=Sass&logoColor=white">
+
+***
+## _Component Tree_
+<img width="100%" alt="component tree" src="https://github.com/MovieApplication/cinemate/assets/95523625/c781c116-56b2-4647-ba36-9f84ae4efa0e">
+
 
 ***
 
