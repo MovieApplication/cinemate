@@ -114,8 +114,6 @@ const MovieDetail = () => {
                   detailList={true}
                   listItem={movieListArr}
                   fnChangePage={fnChangePage}
-                  perView={4.3}
-                  perGroup={4}
                   width={170}
                   height={230}
                 />

@@ -57,6 +57,11 @@ button {
   margin-left: 1.5rem;
 }
 
+.Detail_similar__xpYCl .swiper-slide {
+  width: auto !important;
+  margin-right: 1.5rem;
+}
+
 .swiper-button-prev {
   display: block;
   font-size: 1.2rem;
