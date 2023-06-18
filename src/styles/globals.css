@@ -152,3 +152,34 @@ button {
   font-size: 20px;
   margin: 0 .6rem;
 }
+
+@media (min-width: 425px) and (max-width: 768px) {
+  .Home_popular__lyq2Y .swiper-wrapper {
+    padding: 0 1rem .5rem;
+  }
+
+  .swiper-slide img {
+    width: 9rem;
+    height: auto;
+  }
+}
+
+@media (max-width: 424px) {
+  .Home_popular__lyq2Y .swiper-wrapper {
+    padding: 0 .4rem .2rem;
+  }
+
+  .swiper-slide img {
+    width: 6.5rem;
+    height: auto;
+  }
+
+  .swiper-button-next {
+    right: -5px;
+  }
+
+  .swiper-button-prev svg, .swiper-button-next svg {
+    width: 1.2rem;
+    height: 1.5rem;
+  }
+}

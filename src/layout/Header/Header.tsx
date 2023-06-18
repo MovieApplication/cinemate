@@ -41,6 +41,7 @@ export default function Header() {
         <Image
           src="/images/logo.png"
           alt="CINEMATE"
+          className={header.logo}
           width={150}
           height={30}
         />
@@ -50,7 +51,7 @@ export default function Header() {
         router.pathname !== '/auth/kakao' && (
           kakaoLoginShow
           ? <Link href={KAKAO_AUTH_URL}>
-            <Image src={KakaoLogo} alt="카카오 로그인"/>
+            <Image src={KakaoLogo} alt="카카오 로그인" className={header.kakaoLogo}/>
           </Link>
           : <button
               type='button'
