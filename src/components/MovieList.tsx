@@ -24,6 +24,8 @@ const MovieList = (props: MovieListProps) => {
     <Swiper
       modules={[Virtual, Navigation]}
       virtual
+      slidesPerView={3.2}
+      slidesPerGroup={3}
       navigation={{
         prevEl: '.swiper-button-prev',
         nextEl: '.swiper-button-next'
