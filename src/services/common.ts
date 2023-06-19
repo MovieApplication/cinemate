@@ -175,7 +175,7 @@ export const Data = {
 
 // 카카오 로그인
 export const CLIENT_ID = "d406d04caf54515425c2000ab78a1e9e"
-export const REDIRECT_URI = "http://3.35.18.77:3000/auth/kakao"
+export const REDIRECT_URI = "http://3.34.139.203:3000/auth/kakao"
 export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`
 
 // sweetAlert
