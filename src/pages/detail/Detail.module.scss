@@ -9,7 +9,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 1280px;
+  width: 1200px;
   margin: 0 auto;
 }
 
@@ -152,7 +152,7 @@
 
 // 리뷰 컴포넌트
 .review {
-  width: 1280px;
+  width: 1200px;
   margin: 4rem auto;
 
   ul {
@@ -321,5 +321,113 @@
     position: absolute;
     right: 2rem;
     bottom: 2rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .wrapper {
+    padding: 1rem 3rem;
+  }
+
+  .container {
+    width: 88vw;
+    align-items: flex-start;
+  }
+
+  .imageBox {
+    width: 35%;
+    img {
+      width: 100%;
+      height: 446px;
+    }
+  }
+
+  .detailBox {
+    width: 65%;
+    height: 446px;
+    li {
+      &:first-child {
+        font-size: 30px;
+      }
+      &:nth-child(2) {
+        width: 100%;
+        font-size: 16px;
+        div {
+          justify-content: space-between;
+          p {
+            font-size: 24px;
+          }
+          svg {
+            width: 2rem;
+            height: 2rem;
+          }
+        }
+      }
+      &:nth-child(3) {
+        font-size: 16px;
+      }
+      &:last-child {
+        width: 100%;
+        font-size: 13px;
+      }
+    }
+  }
+
+  .similar {
+    p {
+      font-size: 16px;
+      margin-top: 1.5rem;
+    }
+    img {
+      width: 120px;
+      height: fit-content;
+    }
+  }
+
+  .cover {
+    padding: .6rem;
+    li {
+      margin-top: .1rem;
+      &:nth-child(2) {
+        font-size: 14px;
+      }
+      &:nth-child(3) {
+        font-size: 12px;
+      }
+      &:last-child {
+        font-size: 12px;
+        margin-top: .2rem;
+        line-height: 15px;
+      }
+    }
+  }
+
+  .review {
+    width: 88vw;
+  }
+
+  .title {
+    p {
+      font-size: 20px;
+    }
+    button {
+      font-size: 18px;
+    }
+  }
+
+  .nonReview {
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  .addBox {
+    width: 50vw;
+    h2 {
+      font-size: 25px;
+    }
+    svg {
+      width: 1.6rem;
+      height: 1.6rem;
+    }
   }
 }
