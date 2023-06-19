@@ -8,6 +8,8 @@
 > - 역할) 서비스 화면 기획/디자인 및 퍼블리싱, 프론트 구현 
 >
 > 주소 : http://15.165.236.184:3000/
+>
+> → 자세한 프로젝트 실행과정 정리 ([노션](https://dygreen.notion.site/CINEMATE-873488df08b74282a4543651c7cedfcd?pvs=4)) 
 > 
 > <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white"> <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white"> <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=Next.Js&logoColor=white"> <img src="https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=Sass&logoColor=white">
 

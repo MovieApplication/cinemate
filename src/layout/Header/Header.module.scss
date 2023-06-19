@@ -34,3 +34,45 @@
   font-size: 18px;
   font-weight: 500;
 }
+
+@media (min-width: 425px) and (max-width: 768px) {
+  .header, .blackHeader {
+    padding: 0 2rem;
+    height: 4rem;
+  }
+
+  .logo {
+    width: auto;
+    height: 18px;
+  }
+
+  .kakaoLogo {
+    width: auto;
+    height: 28px;
+  }
+
+  .logout {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 424px) {
+  .header, .blackHeader {
+    padding: 0 1.2rem;
+    height: 3rem;
+  }
+
+  .logo {
+    width: auto;
+    height: 14px;
+  }
+
+  .kakaoLogo {
+    width: auto;
+    height: 24px;
+  }
+
+  .logout {
+    font-size: 12px;
+  }
+}

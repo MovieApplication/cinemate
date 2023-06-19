@@ -177,8 +177,6 @@ const Home: NextPage = () => {
                 detailList={false}
                 listItem={data}
                 fnChangePage={fnChangePage}
-                perView={7.5}
-                perGroup={7}
                 width={200}
                 height={270}
               />

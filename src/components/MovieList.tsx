@@ -15,8 +15,6 @@ interface MovieListProps {
   detailList: boolean;
   listItem: { title: string; item: MovieListItems[]; page: number };
   fnChangePage($page: number, $title?: string): void;
-  perView: number;
-  perGroup: number;
   width: number;
   height: number;
 }
@@ -25,14 +23,41 @@ const MovieList = (props: MovieListProps) => {
   return (
     <Swiper
       modules={[Virtual, Navigation]}
-      slidesPerView={props.perView}
-      slidesPerGroup={props.perGroup}
       virtual
+      slidesPerView={3.2}
+      slidesPerGroup={3}
       navigation={{
         prevEl: '.swiper-button-prev',
         nextEl: '.swiper-button-next'
       }}
       onReachEnd={() => props.fnChangePage(props.listItem.page + 1, props.listItem.title)}
+      breakpoints={{
+        1920: {
+          width: 1920,
+          slidesPerView: 7.5,
+          slidesPerGroup: 7
+        },
+        1366: {
+          width: 1366,
+          slidesPerView: 6.5,
+          slidesPerGroup: 6,
+        },
+        1280: {
+          width: 1280,
+          slidesPerView: 5.5,
+          slidesPerGroup: 5,
+        },
+        1024: {
+          width: 1024,
+          slidesPerView: 4.5,
+          slidesPerGroup: 4,
+        },
+        769: {
+          width: 769,
+          slidesPerView: 3.5,
+          slidesPerGroup: 3,
+        }
+      }}
     >
       <div className="swiper-button-prev">
         <FontAwesomeIcon icon={faChevronLeft} />

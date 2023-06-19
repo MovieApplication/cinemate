@@ -61,6 +61,7 @@ const MovieDetail = () => {
   // url query 변경 감지
   useEffect(() => {
     if (router.query.movieId) {
+      setSimilarData(movieResultInit)
       setMovieId(router.query.movieId as string)
     }
   }, [router.query.movieId])
@@ -114,8 +115,6 @@ const MovieDetail = () => {
                   detailList={true}
                   listItem={movieListArr}
                   fnChangePage={fnChangePage}
-                  perView={4.3}
-                  perGroup={4}
                   width={170}
                   height={230}
                 />
