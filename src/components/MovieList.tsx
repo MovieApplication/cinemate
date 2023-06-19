@@ -24,8 +24,8 @@ const MovieList = (props: MovieListProps) => {
     <Swiper
       modules={[Virtual, Navigation]}
       virtual
-      slidesPerView={3.2}
-      slidesPerGroup={3}
+      slidesPerView={7.5}
+      slidesPerGroup={7}
       navigation={{
         prevEl: '.swiper-button-prev',
         nextEl: '.swiper-button-next'
@@ -52,11 +52,21 @@ const MovieList = (props: MovieListProps) => {
           slidesPerView: 4.5,
           slidesPerGroup: 4,
         },
-        769: {
-          width: 769,
+        768: {
+          width: 768,
           slidesPerView: 3.5,
           slidesPerGroup: 3,
-        }
+        },
+        424: {
+          width: 424,
+          slidesPerView: 2.5,
+          slidesPerGroup: 3,
+        },
+        320: {
+          width: 320,
+          slidesPerView: 2.5,
+          slidesPerGroup: 3,
+        },
       }}
     >
       <div className="swiper-button-prev">
