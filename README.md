@@ -48,3 +48,4 @@
 
 [ SCSS ]
 - 실시간 인기 순위 영화 넘버링 : `data-idx={index + 1}`를 통해 index 값을 넘겨주어 scss 파일 내에서 `attr(data-idx);` 스타일링
+- `media query` : 반응형 페이지 구현 (PC / Tablet / Mobile)
