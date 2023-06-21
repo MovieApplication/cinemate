@@ -154,6 +154,11 @@ button {
 }
 
 @media (min-width: 425px) and (max-width: 768px) {
+  .swal2-popup {
+    width: 24rem !important;
+    font-size: 14px !important;
+  }
+
   .Home_popular__lyq2Y .swiper-wrapper {
     padding: 0 1rem .5rem;
   }
@@ -162,9 +167,23 @@ button {
     width: 9rem;
     height: auto;
   }
+
+  .paging {
+    font-size: 14px;
+    margin-top: 30px;
+  }
+
+  .paging button {
+    margin: 0 .4rem;
+  }
 }
 
 @media (max-width: 424px) {
+  .swal2-popup {
+    width: 20rem !important;
+    font-size: 13px !important;
+  }
+
   .Home_popular__lyq2Y .swiper-wrapper {
     padding: 0 .4rem .2rem;
   }
