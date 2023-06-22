@@ -226,6 +226,7 @@
 }
 
 .buttonBox {
+  display: flex;
   svg {
     width: 1.2rem;
     height: 1.2rem;
@@ -235,7 +236,7 @@
 }
 
 .nonReview {
-  margin-top: 4rem;
+  margin: 4rem 0;
   text-align: center;
   font-size: 18px;
   line-height: 30px;
@@ -444,12 +445,13 @@
 
   .imageBox {
     width: 100%;
-    height: 30vh;
+    height: 35vh;
     overflow: hidden;
     border-radius: 3px;
     img {
       width: 100%;
       height: 100vh;
+      transform: translateY(-62%);
     }
   }
 
@@ -478,9 +480,10 @@
       }
       &:nth-child(3) {
         font-size: 15px;
-        margin-top: .5rem;
+        margin-top: 1.2rem;
       }
       &:last-child {
+        display: block;
         width: 100%;
         font-size: 13px;
         line-height: 18px;
@@ -491,7 +494,7 @@
   .similar {
     p {
       font-size: 16px;
-      margin-top: 1.5rem;
+      margin-top: 3rem;
     }
     img {
       width: 120px;
@@ -519,7 +522,14 @@
 
   .review {
     width: 100%;
-    margin: 2rem auto;
+    margin: 3rem auto;
+    ul {
+      margin-top: 1rem;
+      li {
+        margin: .5rem 0;
+        padding: 1rem;
+      }
+    }
   }
 
   .title {
@@ -613,12 +623,13 @@
 
   .imageBox {
     width: 100%;
-    height: 26vh;
+    height: 35vh;
     overflow: hidden;
     border-radius: 3px;
     img {
       width: 100%;
       height: 100vh;
+      transform: translateY(-62%);
     }
   }
 
@@ -648,9 +659,10 @@
       }
       &:nth-child(3) {
         font-size: 14px;
-        margin-top: .5rem;
+        margin-top: 1.2rem;
       }
       &:last-child {
+        display: block;
         width: 100%;
         font-size: 12px;
         line-height: 16px;
@@ -661,7 +673,7 @@
   .similar {
     p {
       font-size: 14px;
-      margin-top: 1.2rem;
+      margin-top: 3rem;
     }
     img {
       width: 100px;
@@ -689,11 +701,11 @@
 
   .review {
     width: 100%;
-    margin: 1.2rem auto;
+    margin: 3rem auto;
     ul {
-      margin-top: .8rem;
+      margin-top: 1rem;
       li {
-        margin: 0;
+        margin: .5rem 0;
         padding: .8rem;
       }
     }
