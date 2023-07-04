@@ -3,13 +3,17 @@ import { useRouter } from 'next/router'
 import Image from "next/image"
 import Link from "next/link"
 import header from './Header.module.scss'
-import {Data, KAKAO_AUTH_URL, kakaoLogout, sAlert} from "services/common"
+import {Data, GetApi, KAKAO_AUTH_URL, kakaoLogout, sAlert} from "services/common"
 import KakaoLogo from "../../../public/images/kakao_login_small.png"
+import apiList from "utils/apiList"
 
 export default function Header() {
+  const router = useRouter()
   const [scrollValue, setScrollValue] = useState(0)
   const [kakaoLoginShow, setKakaoLoginShow] = useState(true)
-  const router = useRouter()
+
+  const [today, setToday] = useState(0)
+  const [total, setTotal] = useState(0)
 
   const updateScroll = () => setScrollValue(window.scrollY || document.documentElement.scrollTop)
 
@@ -24,6 +28,29 @@ export default function Header() {
       }
     })
   }
+
+  // 방문자 수 가져오기
+  const fnGetDailyVisitor = async () => {
+    await GetApi(apiList.dailyVisitor).then(res => {
+      if (res !== 'FAIL') {
+        setToday(res.count)
+      }
+    })
+  }
+
+  const fnGetTotalVisitor = async () => {
+    await GetApi(apiList.totalVisitor).then(res => {
+      if (res !== 'FAIL') {
+        setTotal(res.count)
+      }
+    })
+  }
+
+  // 방문자 수 가져오기
+  useEffect(() => {
+    fnGetDailyVisitor()
+    fnGetTotalVisitor()
+  },[])
 
   // router 변경마다 로그인 여부 체크해 아이콘 변경
   useEffect(() => {
@@ -46,7 +73,7 @@ export default function Header() {
           height={30}
         />
       </Link>
-      Today :    Total :
+      <p>Today : {today} Total : {total}</p>
       {
         router.pathname !== '/auth/kakao' && (
           kakaoLoginShow
