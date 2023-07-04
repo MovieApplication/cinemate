@@ -46,7 +46,7 @@ export default function Header() {
           height={30}
         />
       </Link>
-
+      Today :    Total :
       {
         router.pathname !== '/auth/kakao' && (
           kakaoLoginShow

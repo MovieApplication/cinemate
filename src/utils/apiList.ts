@@ -116,6 +116,21 @@ const apiList: ApiList = {
     url: `${domain}/api/v1/user/refresh-token`,
     desc: '토큰 재발급'
   },
+  /**
+   * 방문자 정보
+   */
+  // 총 방문자 수
+  'totalVisitor' : {
+    method: 'GET',
+    url: `${domain}/api/v1/visitor/total`,
+    desc: '총 방문자 수'
+  },
+  //일일 방문자 수
+  'dailyVisitor' : {
+    method: 'GET',
+    url: `${domain}/api/v1/visitor/daily`,
+    desc: '일일 방문자 수'
+  }
 }
 
 export default apiList
