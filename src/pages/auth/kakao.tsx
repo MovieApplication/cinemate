@@ -3,9 +3,10 @@ import {useEffect, useState} from "react"
 import { useRouter } from 'next/router'
 import Spinner from "../../../public/images/Spinner.gif"
 import Image from "next/image"
-import {GetApi, GetApiPath, CLIENT_ID, REDIRECT_URI, sAlert, Data} from "services/common"
+import {GetApi, GetApiPath, sAlert} from "services/common"
 import axios from "axios"
 import apiList from "utils/apiList"
+import {Data, setCookie} from "services/service"
 
 const Kakao = () => {
   const [kakaoAccessToken, setKakaoAccessToken] = useState<string>('')
@@ -24,44 +25,45 @@ const Kakao = () => {
       return searchParams
     }
 
-    await axios({
-      method: 'POST',
-      headers: {
-        'content-type': 'application/x-www-form-urlencoded;charset=utf-8',
-      },
-      url: 'https://kauth.kakao.com/oauth/token',
-      data: makeFormData({
-        grant_type: 'authorization_code',
-        client_id: CLIENT_ID,
-        redirect_uri: REDIRECT_URI,
-        code
+    try {
+      const res = await axios({
+        method: 'POST',
+        headers: {
+          'content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+        },
+        url: 'https://kauth.kakao.com/oauth/token',
+        data: makeFormData({
+          grant_type: 'authorization_code',
+          client_id: process.env.NEXT_PUBLIC_CLIENT_ID as string,
+          // redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_LOCAL_URI as string,
+          redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URI as string,
+          code
+        })
       })
-    }).then(res => {
-      try {
-        Data.set('kakaoLogin', res.data)
-        setKakaoAccessToken(res.data.access_token)
-      } catch (e) {
-        console.log('e : ', e)
-      }
-    })
+
+      Data.set('kakaoLogin', res.data.access_token)
+      setKakaoAccessToken(res.data.access_token)
+    } catch (err) {
+      console.warn(err)
+    }
   }
 
   // 카카오 로그인 : 사용자 정보 받기
   const fnGetKakaoUserInfo = async () => {
-    await axios({
+    const res = await axios({
       method: 'GET',
       headers: {
         "Authorization": `Bearer ${kakaoAccessToken}`
       },
       url: "https://kapi.kakao.com/v2/user/me",
-    }).then(res => {
-      try {
-        Data.set('userInfo', res.data)
-        fnUserInfoCheck(res.data.id.toString(), res.data.kakao_account.profile.nickname)
-      } catch (e) {
-        console.log('e : ', e)
-      }
     })
+
+    try {
+      Data.set('userInfo', res.data.kakao_account.profile.nickname)
+      fnUserInfoCheck(res.data.id.toString(), res.data.kakao_account.profile.nickname)
+    } catch (e) {
+      console.log('e : ', e)
+    }
   }
 
   // 유저 조회
@@ -93,7 +95,13 @@ const Kakao = () => {
   const fnUserLogin = async ($nickname: string, $existing: boolean) => {
     await GetApiPath(apiList.userLogin, $nickname).then(res => {
       if (res !== 'FAIL') {
-        Data.set('login', res)
+        Data.set('login', res.accessToken)
+
+        // 쿠키 세팅 : 10시간
+        setCookie('CRT', res.refreshTokenId, {
+          expires: 36000000,
+          SameSite: 'Strict'
+        })
 
         sAlert({
           icon: 'success',

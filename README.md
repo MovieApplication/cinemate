@@ -18,7 +18,14 @@
 <img width="100%" alt="component tree" src="https://github.com/MovieApplication/cinemate/assets/95523625/c781c116-56b2-4647-ba36-9f84ae4efa0e">
 
 
-***
+<br/>
+
+## _Refactoring_
+[2023.07 ~ ]
+- 로그인 토큰 정보 저장 방식 변경(`localStorage` → `sessionStorage` + `cookie`)
+
+
+<br/>
 
 ## _Service Info_
 
@@ -37,7 +44,7 @@
 -  [카카오] 로그인 토큰 발급 → [카카오] 사용자 정보 받기 → [CINEMATE] 유저 조회 → [CINEMATE] 기존 유저일 경우 로그인 / 신규 유저일 경우 유저 등록 후 로그인(토큰 발급+토큰 재발급)
 - [카카오] 로그아웃
 
-***
+<br/>
 
 ## _Detail_
 [ Next.js ]

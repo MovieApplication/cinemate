@@ -3,10 +3,11 @@ import {useRouter} from "next/router"
 import detail from "pages/detail/Detail.module.scss"
 import {PaginationInfo, ReviewItem} from "utils/interface"
 import ReviewList from "pages/detail/components/ReviewList"
-import {Data, GetApiPath, KAKAO_AUTH_URL, sAlert} from "services/common"
+import {GetApiPath, KAKAO_AUTH_URL, sAlert} from "services/common"
 import apiList from "utils/apiList"
 import Paging from "components/Paging"
 import ModalReviewAdd from "pages/detail/components/ModalReviewAdd"
+import {Data} from "services/service"
 
 interface ReviewProps {
   movieId: string;

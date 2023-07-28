@@ -3,19 +3,25 @@ import axios, {AxiosRequestConfig} from "axios"
 import Swal from 'sweetalert2'
 import moment from "moment"
 import 'moment/locale/ko'
+import {Data, deleteCookie, getCookie, setCookie} from "services/service"
 
 const authHeader = () => {
-  return { 'Authorization': 'Bearer ' + Data.get('login').accessToken }
+  return { 'Authorization': 'Bearer ' + Data.get('login') }
 }
 
 // 토큰 재발급
 export const getAuthenticate = async () => {
   await GetApi(apiList.getRefreshToken, {
-    refreshTokenId: Data.get('login').refreshTokenId
-  }).then(($res: object | string) => {
+    refreshTokenId: getCookie('CRT')
+  }).then(($res) => {
     if($res !== 'FAIL') {
       // access-token 만료 시 : 토큰 재발급
-      Data.set('login', $res)
+      Data.set('login', $res.accessToken)
+      // 쿠키 세팅 : 10시간
+      setCookie('CRT', $res.refreshTokenId, {
+        expires: 36000000,
+        SameSite: 'Strict'
+      })
     }
   })
 }
@@ -32,12 +38,14 @@ export const kakaoLogout = () => {
     url: 'https://kapi.kakao.com/v1/user/logout',
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
-      "Authorization": `Bearer ${Data.get('kakaoLogin').access_token}`
+      "Authorization": `Bearer ${Data.get('kakaoLogin')}`
     },
   }).then(() => {
     ['kakaoLogin', 'login', 'userInfo'].forEach((key: string) => {
       Data.remove(key)
     })
+
+    deleteCookie('CRT')
 
     window.location.href = '/'
   }).catch((e) => {
@@ -47,6 +55,8 @@ export const kakaoLogout = () => {
       ['kakaoLogin', 'login', 'userInfo'].forEach((key: string) => {
         Data.remove(key)
       })
+
+      deleteCookie('CRT')
 
       window.location.href = '/'
     }
@@ -150,33 +160,11 @@ export const GetApiPath = async ($api: Api, $param?: string | number, $page?: ob
     })
 }
 
-export const Data = {
-  set: ($name: string, $value: boolean | string | object) => {
-    const value: string = typeof $value === 'object' ? JSON.stringify($value) : typeof $value === 'boolean' ? $value.toString() : $value
 
-    window.localStorage.setItem($name, value)
-  },
-  get: ($name: string) => {
-    try {
-      const data: string | null = window.localStorage.getItem($name)
-
-      return data !== 'undefined' && data !== null ? JSON.parse(data) : data
-    } catch (e) {
-      return window.localStorage.getItem($name)
-    }
-  },
-  remove: ($name: string) => {
-    window.localStorage.removeItem($name)
-  },
-  clear: () => {
-    window.localStorage.clear()
-  }
-}
 
 // 카카오 로그인
-export const CLIENT_ID = "d406d04caf54515425c2000ab78a1e9e"
-export const REDIRECT_URI = "http://3.34.139.203:3000/auth/kakao"
-export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`
+// export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_LOCAL_URI}&response_type=code`
+export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&response_type=code`
 
 // sweetAlert
 const mixAlert = Swal.mixin({
@@ -215,7 +203,7 @@ export const tokenExpireCheck = () => {
   if ($t !== 'undefined' && $t !== null && typeof $t !== 'string') {
     const now = moment().format('X')
 
-    $tData = parseJwt($t.accessToken)
+    $tData = parseJwt($t)
 
     return now < $tData.exp
   } else {
@@ -227,7 +215,7 @@ export const getLoginId = () => {
   const $t = Data.get('login')
 
   if ($t !== 'undefined' && $t !== null) {
-    const $tData = parseJwt($t.accessToken)
+    const $tData = parseJwt($t)
 
     return $tData.sub
   }
