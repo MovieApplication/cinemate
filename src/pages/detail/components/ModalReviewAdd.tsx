@@ -4,9 +4,10 @@ import {ReviewItem} from "utils/interface"
 import detail from "pages/detail/Detail.module.scss"
 import {faXmark} from "@fortawesome/free-solid-svg-icons"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {GetApi, sAlert} from "services/common"
+import {GetApi} from "services/common"
 import apiList from "utils/apiList"
 import {Data} from "services/service"
+import {sAlert} from "utils/sweetAlert"
 
 interface ReviewAddProps {
   currentReview: ReviewItem;

@@ -3,10 +3,11 @@ import {useEffect, useState} from "react"
 import { useRouter } from 'next/router'
 import Spinner from "../../../public/images/Spinner.gif"
 import Image from "next/image"
-import {GetApi, GetApiPath, sAlert} from "services/common"
+import {GetApi, GetApiPath} from "services/common"
 import axios from "axios"
 import apiList from "utils/apiList"
 import {Data, setCookie} from "services/service"
+import {sAlert} from "utils/sweetAlert";
 
 const Kakao = () => {
   const [kakaoAccessToken, setKakaoAccessToken] = useState<string>('')
@@ -35,8 +36,8 @@ const Kakao = () => {
         data: makeFormData({
           grant_type: 'authorization_code',
           client_id: process.env.NEXT_PUBLIC_CLIENT_ID as string,
-          // redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_LOCAL_URI as string,
-          redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URI as string,
+          redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_LOCAL_URI as string,
+          // redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URI as string,
           code
         })
       })
