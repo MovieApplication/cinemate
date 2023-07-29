@@ -3,7 +3,7 @@ import axios, {AxiosRequestConfig} from "axios"
 import moment from "moment"
 import 'moment/locale/ko'
 import {Data, getCookie, setCookie} from "services/service"
-import {kakaoLogout} from "utils/kakaoLogout"
+import {kakaoLogout} from "utils/logout"
 import {sAlert} from "utils/sweetAlert"
 
 // 토큰 재발급
