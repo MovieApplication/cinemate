@@ -7,7 +7,7 @@ import {GetApi, KAKAO_AUTH_URL} from "services/common"
 import KakaoLogo from "../../../public/images/kakao_login_small.png"
 import apiList from "utils/apiList"
 import {Data} from "services/service"
-import {kakaoLogout} from "services/logout"
+import {kakaoLogout} from "services/kakaoLogout"
 import {sAlert} from "services/sweetAlert"
 
 export default function Header() {
