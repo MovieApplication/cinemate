@@ -23,6 +23,7 @@
 ## _Refactoring_
 [2023.07 ~ ]
 - 로그인 토큰 정보 저장 방식 변경(`localStorage` → `sessionStorage` + `cookie`)
+- `Axios interceptors` 사용 : 전역에서 authentication tokens 관리, 에러 메세지 관리
 
 
 <br/>

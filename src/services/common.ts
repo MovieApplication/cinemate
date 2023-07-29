@@ -6,10 +6,6 @@ import {Data, getCookie, setCookie} from "services/service"
 import {kakaoLogout} from "utils/kakaoLogout"
 import {sAlert} from "utils/sweetAlert"
 
-const authHeader = () => {
-  return { 'Authorization': 'Bearer ' + Data.get('login') }
-}
-
 // 토큰 재발급
 export const getAuthenticate = async () => {
   await GetApi(apiList.getRefreshToken, {
@@ -27,33 +23,32 @@ export const getAuthenticate = async () => {
   })
 }
 
+// access token 만료 여부 확인
 const fnAuthCheck = async () => {
+  // 만료 시, 토큰을 재발급 받는다
   if(!tokenExpireCheck()) {
     await getAuthenticate()
   }
 }
 
-export const GetApi = async ($api: Api, $param?: object) => {
-  let option: AxiosRequestConfig = {
-    withCredentials: true
+// Axios Interceptor
+// request : access token 만료 여부 확인 + header 값 세팅
+axios.interceptors.request.use((config: any) => {
+  if (config.private) {
+    fnAuthCheck()
+    config.headers.Authorization = `Bearer ${Data.get('login')}`
   }
 
-  if ($api.method === 'GET') {
-    option = { ...option, ...$api, params: $param !== undefined ? $param : {} }
-  } else {
-    option = { ...option, ...$api, data: $param !== undefined ? $param : {} }
-  }
+  return config
+}, (error) => {
+  // request가 error 났을 시
+  return Promise.reject('request error : ' + error)
+})
 
-  if ($api.private) {
-    await fnAuthCheck()
-    option.headers = authHeader()
-  }
-
-  try {
-    const res = await axios(option)
-
-    return res.data
-  } catch (err: any) {
+// response : refresh token 만료 에러 포함 에러 메세지 alert
+axios.interceptors.response.use(
+  res => res,
+  async err => {
     if (err.response.data.errorCode === "INTERNAL_SERVER_ERROR" || err.response.data.errorCode === "EXPIRED_TOKEN") {
       sAlert({
         html: '로그인 대기 유효 시간이 만료 되었습니다.<br>다시 로그인 시도해 주시기 바랍니다.',
@@ -70,8 +65,24 @@ export const GetApi = async ($api: Api, $param?: object) => {
 
     return 'FAIL'
   }
+)
+
+export const GetApi = async ($api: Api, $param?: object) => {
+  let option: AxiosRequestConfig = {
+    withCredentials: true
+  }
+
+  if ($api.method === 'GET') {
+    option = { ...option, ...$api, params: $param !== undefined ? $param : {} }
+  } else {
+    option = { ...option, ...$api, data: $param !== undefined ? $param : {} }
+  }
+
+  const res = await axios(option)
+  return res.data
 }
 
+// Path Variable
 export const GetApiPath = async ($api: Api, $param?: string | number, $page?: object) => {
   let option: AxiosRequestConfig = {
     withCredentials: true
@@ -90,32 +101,8 @@ export const GetApiPath = async ($api: Api, $param?: string | number, $page?: ob
     option = { ...option, ...$api, data: $page !== undefined ? $page : {} }
   }
 
-  if ($api.private) {
-    await fnAuthCheck()
-    option.headers = authHeader()
-  }
-
-  try {
-    const res = await axios(option)
-
-    return res.data
-  } catch (err: any) {
-    if (err.response.data.errorCode === "INTERNAL_SERVER_ERROR" || err.response.data.errorCode === "EXPIRED_TOKEN") {
-      sAlert({
-        html: '로그인 대기 유효 시간이 만료 되었습니다.<br>다시 로그인 시도해 주시기 바랍니다.',
-        didClose: () => {
-          kakaoLogout()
-        }
-      })
-    } else {
-      sAlert({
-        text: err.response.data.errorMessage ? err.response.data.errorMessage : err.response.data.message,
-        icon: 'error'
-      })
-    }
-
-    return 'FAIL'
-  }
+  const res = await axios(option)
+  return res.data
 }
 
 // 카카오 로그인
