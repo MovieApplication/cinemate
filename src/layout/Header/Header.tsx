@@ -3,11 +3,10 @@ import { useRouter } from 'next/router'
 import Image from "next/image"
 import Link from "next/link"
 import header from './Header.module.scss'
-import {GetApi, KAKAO_AUTH_URL, kakaoLogout} from "services/common"
+import {GetApi, KAKAO_AUTH_URL, kakaoLogout, sAlert} from "services/common"
 import KakaoLogo from "../../../public/images/kakao_login_small.png"
 import apiList from "utils/apiList"
 import {Data} from "services/service"
-import {sAlert} from "services/sweetAlert"
 
 export default function Header() {
   const router = useRouter()

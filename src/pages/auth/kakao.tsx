@@ -3,11 +3,10 @@ import {useEffect, useState} from "react"
 import { useRouter } from 'next/router'
 import Spinner from "../../../public/images/Spinner.gif"
 import Image from "next/image"
-import {GetApi, GetApiPath} from "services/common"
+import {GetApi, GetApiPath, sAlert} from "services/common"
 import axios from "axios"
 import apiList from "utils/apiList"
 import {Data, setCookie} from "services/service"
-import {sAlert} from "services/sweetAlert"
 
 const Kakao = () => {
   const [kakaoAccessToken, setKakaoAccessToken] = useState<string>('')
