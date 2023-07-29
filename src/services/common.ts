@@ -2,8 +2,7 @@ import apiList, { Api } from "utils/apiList"
 import axios, {AxiosRequestConfig} from "axios"
 import moment from "moment"
 import 'moment/locale/ko'
-import {Data, getCookie, setCookie} from "services/service"
-import {kakaoLogout} from "services/kakaoLogout"
+import {Data, deleteCookie, getCookie, setCookie} from "services/service"
 import {sAlert} from "services/sweetAlert"
 
 // 토큰 재발급
@@ -142,4 +141,35 @@ export const getLoginId = () => {
 
     return $tData.sub
   }
+}
+
+export const kakaoLogout = async () => {
+  await axios({
+    method: 'POST',
+    url: 'https://kapi.kakao.com/v1/user/logout',
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Authorization": `Bearer ${Data.get('kakaoLogin')}`
+    },
+  }).then(() => {
+    ['kakaoLogin', 'login', 'userInfo'].forEach((key: string) => {
+      Data.remove(key)
+    })
+
+    deleteCookie('CRT')
+
+    window.location.href = '/'
+  }).catch((e) => {
+    // console.log('e : ' , e)
+    // 이미 만료된 토큰일 경우
+    if (e.response.data.code === -401) {
+      ['kakaoLogin', 'login', 'userInfo'].forEach((key: string) => {
+        Data.remove(key)
+      })
+
+      deleteCookie('CRT')
+
+      window.location.href = '/'
+    }
+  })
 }
