@@ -7,7 +7,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {GetApi} from "services/common"
 import apiList from "utils/apiList"
 import {Data} from "services/service"
-import {sAlert} from "utils/sweetAlert"
+import {sAlert} from "services/sweetAlert"
 
 interface ReviewAddProps {
   currentReview: ReviewItem;

@@ -7,7 +7,7 @@ import {GetApi, GetApiPath} from "services/common"
 import axios from "axios"
 import apiList from "utils/apiList"
 import {Data, setCookie} from "services/service"
-import {sAlert} from "utils/sweetAlert";
+import {sAlert} from "services/sweetAlert"
 
 const Kakao = () => {
   const [kakaoAccessToken, setKakaoAccessToken] = useState<string>('')

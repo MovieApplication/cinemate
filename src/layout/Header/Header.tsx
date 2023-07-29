@@ -7,8 +7,8 @@ import {GetApi, KAKAO_AUTH_URL} from "services/common"
 import KakaoLogo from "../../../public/images/kakao_login_small.png"
 import apiList from "utils/apiList"
 import {Data} from "services/service"
-import {kakaoLogout} from "utils/logout"
-import {sAlert} from "utils/sweetAlert"
+import {kakaoLogout} from "services/logout"
+import {sAlert} from "services/sweetAlert"
 
 export default function Header() {
   const router = useRouter()

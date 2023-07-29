@@ -8,7 +8,7 @@ import apiList from "utils/apiList"
 import Paging from "components/Paging"
 import ModalReviewAdd from "pages/detail/components/ModalReviewAdd"
 import {Data} from "services/service"
-import {sAlert} from "utils/sweetAlert"
+import {sAlert} from "services/sweetAlert"
 
 interface ReviewProps {
   movieId: string;

@@ -3,8 +3,8 @@ import axios, {AxiosRequestConfig} from "axios"
 import moment from "moment"
 import 'moment/locale/ko'
 import {Data, getCookie, setCookie} from "services/service"
-import {kakaoLogout} from "utils/logout"
-import {sAlert} from "utils/sweetAlert"
+import {kakaoLogout} from "services/logout"
+import {sAlert} from "services/sweetAlert"
 
 // 토큰 재발급
 export const getAuthenticate = async () => {
