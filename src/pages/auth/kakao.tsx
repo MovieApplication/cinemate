@@ -36,8 +36,8 @@ const Kakao = () => {
         data: makeFormData({
           grant_type: 'authorization_code',
           client_id: process.env.NEXT_PUBLIC_CLIENT_ID as string,
-          redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_LOCAL_URI as string,
-          // redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URI as string,
+          // redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_LOCAL_URI as string,
+          redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URI as string,
           code
         })
       })
