@@ -33,9 +33,9 @@ const fnAuthCheck = async () => {
 
 // Axios Interceptor
 // request : access token 만료 여부 확인 + header 값 세팅
-axios.interceptors.request.use((config: any) => {
+axios.interceptors.request.use(async (config: any) => {
   if (config.private) {
-    fnAuthCheck()
+    await fnAuthCheck()
     config.headers.Authorization = `Bearer ${Data.get('login')}`
   }
 
