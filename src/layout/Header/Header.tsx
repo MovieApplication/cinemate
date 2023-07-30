@@ -74,7 +74,7 @@ export default function Header() {
           height={30}
         />
       </Link>
-      <p style={{fontWeight : "bold"}}>Today : {today}  / Total : {total}</p>
+      <p className={header.visitor}>Today : {today}  / Total : {total}</p>
       {
         router.pathname !== '/auth/kakao' && (
           kakaoLoginShow

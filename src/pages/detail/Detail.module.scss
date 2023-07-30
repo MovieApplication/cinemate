@@ -511,11 +511,16 @@
       }
       &:nth-child(3) {
         font-size: 12px;
+        margin-top: .3rem;
       }
       &:last-child {
         font-size: 12px;
         margin-top: .2rem;
         line-height: 15px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
       }
     }
   }
@@ -690,11 +695,16 @@
       }
       &:nth-child(3) {
         font-size: 12px;
+        margin-top: .2rem;
       }
       &:last-child {
         font-size: 12px;
         margin-top: .1rem;
         line-height: 15px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
       }
     }
   }
