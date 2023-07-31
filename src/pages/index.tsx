@@ -1,5 +1,5 @@
 // 메인 페이지
-import type { NextPage } from 'next'
+import type { InferGetServerSidePropsType } from 'next'
 import React, {useEffect, useState} from 'react'
 import home from 'styles/Home.module.scss'
 import {GetApi} from "services/common"
@@ -20,12 +20,12 @@ const movieResultInit: MovieResult = {
   total_results: 0
 }
 
-const Home: NextPage = () => {
-  const [popularList, setPopularList] = useState<MovieResult>(movieResultInit)
-  const [inTheaterList, setInTheaterList] = useState<MovieResult>(movieResultInit)
-  const [releaseList, setReleaseList] = useState<MovieResult>(movieResultInit)
-  const [voteList, setVoteList] = useState<MovieResult>(movieResultInit)
-  const [yearList, setYearList] = useState<MovieResult>(movieResultInit)
+const Home = ({popularListInit, inTheaterListInit, releaseListInit, voteListInit, yearListInit}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const [popularList, setPopularList] = useState<MovieResult>(popularListInit)
+  const [inTheaterList, setInTheaterList] = useState<MovieResult>(inTheaterListInit)
+  const [releaseList, setReleaseList] = useState<MovieResult>(releaseListInit)
+  const [voteList, setVoteList] = useState<MovieResult>(voteListInit)
+  const [yearList, setYearList] = useState<MovieResult>(yearListInit)
 
   const movieListArr = [{
     title: '현재 상영 중인 영화',
@@ -125,18 +125,6 @@ const Home: NextPage = () => {
   }
 
   useEffect(() => {
-    fnGetPopularMovie().then(() =>
-      fnGetInTheaterMovie().then(() =>
-        fnGetReleaseMovie().then(() =>
-          fnGetVoteMovie().then(() =>
-            fnGetYearMovie()
-          )
-        )
-      )
-    )
-  },[])
-
-  useEffect(() => {
     if (popularList.page !== 1) fnGetPopularMovie()
   },[popularList.page])
 
@@ -156,12 +144,12 @@ const Home: NextPage = () => {
     if (yearList.page !== 1) fnGetYearMovie()
   },[yearList.page])
 
-  return popularList.results.length > 0 ? (
+  return (
     <>
-      <div className={home.wrapper} style={{backgroundImage: `linear-gradient(to left, transparent, black), url(${popularList.results[0].backdrop_path})`, backgroundSize: '100%'}}>
-        <h4>{popularList.results[0].title}</h4>
-        <p>{popularList.results[0].overview}</p>
-        <Link href={`/detail/${encodeURIComponent(popularList.results[0].id)}`}>
+      <div className={home.wrapper} style={{backgroundImage: `linear-gradient(to left, transparent, black), url(${popularList?.results[0]?.backdrop_path})`, backgroundSize: '100%'}}>
+        <h4>{popularList?.results[0]?.title}</h4>
+        <p>{popularList?.results[0]?.overview}</p>
+        <Link href={`/detail/${encodeURIComponent(popularList?.results[0]?.id)}`}>
           <FontAwesomeIcon icon={faCircleInfo} />
           <span>상세 정보</span>
         </Link>
@@ -185,7 +173,29 @@ const Home: NextPage = () => {
         ))
       }
     </>
-  ) : <>err</>
+  )
+}
+
+export const getServerSideProps = async () => {
+  try {
+    const popularListInit = await GetApi(apiList.getPopularMovie)
+    const inTheaterListInit = await GetApi(apiList.getInTheaterMovie)
+    const releaseListInit = await GetApi(apiList.getReleaseMovie)
+    const voteListInit = await GetApi(apiList.getVoteMovie)
+    const yearListInit = await GetApi(apiList.getYearMovie)
+
+    return {
+      props: {
+        popularListInit: popularListInit === 'FAIL' ? movieResultInit : popularListInit,
+        inTheaterListInit: inTheaterListInit === 'FAIL' ? movieResultInit : inTheaterListInit,
+        releaseListInit: releaseListInit === 'FAIL' ? movieResultInit : releaseListInit,
+        voteListInit: voteListInit === 'FAIL' ? movieResultInit : voteListInit,
+        yearListInit: yearListInit === 'FAIL' ? movieResultInit : yearListInit,
+      },
+    }
+  } catch (err) {
+    console.warn('server side err : ' + err)
+  }
 }
 
 export default Home

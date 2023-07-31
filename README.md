@@ -24,7 +24,7 @@
 [2023.07 ~ ]
 - 로그인 토큰 정보 저장 방식 변경(`localStorage` → `sessionStorage` + `cookie`)
 - `Axios interceptors` 사용 : 전역에서 authentication tokens 관리, 에러 메세지 관리
-
+- 메인 페이지 : `getServerSideProps`를 사용해 SSR 적용 (사전 렌더링, 동적 데이터 관리)
 
 <br/>
 
