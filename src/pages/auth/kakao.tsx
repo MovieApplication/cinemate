@@ -50,15 +50,15 @@ const Kakao = () => {
 
   // 카카오 로그인 : 사용자 정보 받기
   const fnGetKakaoUserInfo = async () => {
-    const res = await axios({
-      method: 'GET',
-      headers: {
-        "Authorization": `Bearer ${kakaoAccessToken}`
-      },
-      url: "https://kapi.kakao.com/v2/user/me",
-    })
-
     try {
+      const res = await axios({
+        method: 'GET',
+        headers: {
+          "Authorization": `Bearer ${kakaoAccessToken}`
+        },
+        url: "https://kapi.kakao.com/v2/user/me",
+      })
+
       Data.set('userInfo', res.data.kakao_account.profile.nickname)
       fnUserInfoCheck(res.data.id.toString(), res.data.kakao_account.profile.nickname)
     } catch (e) {
