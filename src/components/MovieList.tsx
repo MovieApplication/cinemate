@@ -13,8 +13,7 @@ import Link from "next/link"
 
 interface MovieListProps {
   detailList: boolean;
-  listItem: { title: string; item: MovieListItems[]; page: number };
-  fnChangePage($page: number, $title?: string): void;
+  listItem: { title: string; item: MovieListItems[]; page: number; fetchNext?: () => void };
   width: number;
   height: number;
 }
@@ -30,7 +29,7 @@ const MovieList = (props: MovieListProps) => {
         prevEl: '.swiper-button-prev',
         nextEl: '.swiper-button-next'
       }}
-      onReachEnd={() => props.fnChangePage(props.listItem.page + 1, props.listItem.title)}
+      onReachEnd={() => props.listItem.fetchNext?.()}
       breakpoints={{
         1920: {
           width: 1920,
