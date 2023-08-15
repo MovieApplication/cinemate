@@ -133,7 +133,7 @@ const Home = ({popularListInit, inTheaterListInit, voteListInit, yearListInit, r
     <>
       <div
         className={home.wrapper}
-        style={{backgroundImage: `linear-gradient(to left, transparent, black), url(${popularListQuery.data?.pages[0].results[0].backdrop_path})`, backgroundSize: '100%'}}
+        style={{backgroundImage: `linear-gradient(to left, transparent, black), url(${popularListQuery.data?.pages[0].results[0].backdrop_path})`}}
       >
         <h4>{popularListQuery.data?.pages[0].results[0].title}</h4>
         <p>{popularListQuery.data?.pages[0].results[0].overview}</p>
