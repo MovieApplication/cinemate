@@ -163,11 +163,11 @@ const Home = ({popularListInit, inTheaterListInit, voteListInit, yearListInit, r
 
 export const getServerSideProps = async () => {
   try {
-    const popularListInit = await GetApi(apiList.getPopularMovie)
-    const inTheaterListInit = await GetApi(apiList.getInTheaterMovie)
-    const releaseListInit = await GetApi(apiList.getReleaseMovie)
-    const voteListInit = await GetApi(apiList.getVoteMovie)
-    const yearListInit = await GetApi(apiList.getYearMovie)
+    const popularListInit = await GetApi(apiList.getPopularMovie, { page: 1 })
+    const inTheaterListInit = await GetApi(apiList.getInTheaterMovie, { page: 1 })
+    const releaseListInit = await GetApi(apiList.getReleaseMovie, { page: 1 })
+    const voteListInit = await GetApi(apiList.getVoteMovie, { page: 1 })
+    const yearListInit = await GetApi(apiList.getYearMovie, { page: 1 })
 
     return {
       props: {
