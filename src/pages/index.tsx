@@ -146,7 +146,11 @@ const Home = ({popularListInit, inTheaterListInit, voteListInit, yearListInit, r
       {/* Movie List */}
       {
         movieListArr.map((data, idx) => (
-          <div className={`${home.list} ${data.title === '실시간 인기 순위 영화' ? home.popular : ''}`} key={idx}>
+          <div 
+            className={`${home.list} ${data.title === '실시간 인기 순위 영화' ? home.popular : ''}`}
+            data-popular={`${data.title === '실시간 인기 순위 영화' ? 'popular' : ''}`}
+            key={idx}
+          >
             <p>{data.title}</p>
             <MovieList
               detailList={false}

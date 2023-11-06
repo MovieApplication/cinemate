@@ -49,15 +49,15 @@ button {
   height: 100%;
 }
 
-.Home_popular__lyq2Y .swiper-wrapper {
+div[data-popular=popular] .swiper-wrapper {
   padding: 0 3rem 1rem;
 }
 
-.Home_popular__lyq2Y .swiper-wrapper > div {
+div[data-popular=popular] .swiper-wrapper > div {
   margin-left: 1.5rem;
 }
 
-.Detail_similar__xpYCl .swiper-slide {
+div[data-similar=similar] .swiper-slide {
   width: auto !important;
   margin-right: 1.5rem;
 }
@@ -159,7 +159,7 @@ button {
     font-size: 14px !important;
   }
 
-  .Home_popular__lyq2Y .swiper-wrapper {
+  div[data-popular=popular] .swiper-wrapper {
     padding: 0 1rem .5rem;
   }
 
@@ -184,7 +184,7 @@ button {
     font-size: 13px !important;
   }
 
-  .Home_popular__lyq2Y .swiper-wrapper {
+  div[data-popular=popular] .swiper-wrapper {
     padding: 0 .4rem .2rem;
   }
 

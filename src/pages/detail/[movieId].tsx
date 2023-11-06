@@ -100,7 +100,10 @@ const MovieDetail = ({similarDataInit}: InferGetServerSidePropsType<typeof getSe
           {/* 비슷한 영화 추천 */}
           {
             movieListArr.item.length > 0 &&
-              <div className={detail.similar}>
+              <div
+                className={detail.similar}
+                data-similar="similar"
+              >
                 <p>&lt;{detailData.title}&gt; 와 비슷한 영화</p>
                 <MovieList
                   detailList={true}
